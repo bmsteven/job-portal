@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useContext } from "react"
 import { AsyncStorage } from 'react-native';
 import { BACKEND } from "../utils/api"
+import {LOGIN, REGISTER, LOGOUT, COMPANIES, ADD_COMPANY, ADD_LOGO, EDIT_COMPANY, USERROLES, CATEGORIES, CATEGORIES_FAIL, ADD_DP, ADD_CV, ADD_PROFILE, AUTH, FAILED } from "./types"
 
 const AuthStateContext = createContext()
 const AuthDispatchContext = createContext()
@@ -11,7 +12,7 @@ const authReducer = (state, action) => {
   let companiesCopy
   let companyIndex
   switch (type) {
-    case "LOGIN":
+    case LOGIN:
       AsyncStorage.setItem("user", JSON.stringify(payload))
       return {
         ...state,
@@ -19,14 +20,14 @@ const authReducer = (state, action) => {
         user: payload,
         loading: false,
       }
-    case "REGISTER":
+    case REGISTER:
       return {
         ...state,
         user: payload,
       }
 
     // Logout
-    case "LOGOUT":
+    case LOGOUT:
       AsyncStorage.setItem("user", "")
       return {
         ...state,
@@ -34,20 +35,20 @@ const authReducer = (state, action) => {
         isAuthenticated: false,
       }
 
-    case "COMPANIES":
+    case COMPANIES:
       return {
         ...state,
         companies: payload,
       }
 
-    case "ADD_COMPANY":
+    case ADD_COMPANY:
       companiesCopy = [...state.companies, payload]
       return {
         ...state,
         companies: companiesCopy,
       }
 
-    case "EDIT_COMPANY":
+    case EDIT_COMPANY:
       companiesCopy = [...state.companies]
       companyIndex = companiesCopy.findIndex((el) => el.id === payload.id)
       companiesCopy[companyIndex] = payload
@@ -57,7 +58,7 @@ const authReducer = (state, action) => {
         companies: companiesCopy,
       }
 
-    case "ADD_LOGO":
+    case ADD_LOGO:
       companiesCopy = [...state.companies]
       companyIndex = companiesCopy.findIndex((el) => el.id === payload.data.id)
       companiesCopy[companyIndex] = {
@@ -69,13 +70,13 @@ const authReducer = (state, action) => {
         companies: companiesCopy,
       }
 
-    case "USERROLES":
+    case USERROLES:
       return {
         ...state,
         roles: payload,
       }
 
-    case "CATEGORIES":
+    case CATEGORIES:
       let data
       let finalData
       let filter = []
@@ -122,7 +123,7 @@ const authReducer = (state, action) => {
         categories: finalData,
       }
 
-    case "CATEGORIES_FAIL":
+    case CATEGORIES_FAIL:
       return {
         ...state,
         categories: [
@@ -157,7 +158,7 @@ const authReducer = (state, action) => {
         ],
       }
 
-    case "ADD_DP":
+    case ADD_DP:
       userCopy = {
         ...state.user,
         dp: BACKEND + payload.path,
@@ -166,7 +167,8 @@ const authReducer = (state, action) => {
         ...state,
         user: userCopy,
       }
-    case "ADD_CV":
+
+    case ADD_CV:
       userCopy = {
         ...state.user,
         cv: BACKEND + payload.path,
@@ -176,23 +178,24 @@ const authReducer = (state, action) => {
         user: userCopy,
       }
 
-    case "ADD_PROFILE":
+    case ADD_PROFILE:
       userCopy = { ...payload, token: user.token }
       return {
         ...state,
         user: userCopy,
       }
 
-    // // Get user data
-    // case "AUTH":
+    // Get user data
+    case AUTH:
     //   userCopy = 
-    //   return {
-    //     ...state,
-    //     user: payload,
-    //     isAuthenticated: true,
-    //     loading: false,
-    //   }
-    case "FAILED":
+      return {
+        ...state,
+        user: payload,
+        isAuthenticated: true,
+        loading: false,
+      }
+      
+    case FAILED:
       return {
         ...state,
         loading: false,
