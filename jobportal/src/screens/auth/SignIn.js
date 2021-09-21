@@ -1,17 +1,33 @@
-import React from "react"
-import { View, Text, Image, ScrollView, Button } from "react-native"
+import React, {useState} from "react"
+import { View, Text, ScrollView, Button } from "react-native"
 import { images, SIZES, FONTS,COLORS } from "../../constants"
 import { TextButton, FormInput } from "../../components"
 import AuthLayout from "./AuthLayout"
 
 const SignIn = ({navigation}) => {
-  const handleChange = e => {
-    
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  })
+
+const [errors, setErrors] = useState({})
+
+const [loading, setLoading] = useState(false)
+
+  const handleChange = (e, field) => {
+    console.log(e)
+    setFormData({
+      ...formData,
+      [field]: e
+    })
   }
+
+  console.log(formData);
+
   return (
     <AuthLayout title="Lets Sign You In" subtitle="Welcome back, please login to your account">
-      <FormInput label="Username or email" placeholder="email@example.com" handleChange={handleChange} autoComplete="email" />
-      <FormInput label="Password" placeholder="email@example.com" handleChange={handleChange} autoComplete="email" />
+      <FormInput label="Username or email" placeholder="email@example.com" handleChange={handleChange} autoComplete="email" value={formData.username} name="username"/>
+      <FormInput label="Password" placeholder="email@example.com" handleChange={handleChange} autoComplete="password" secureTextEntry={true} value={formData.password} name="password" />
       <TextButton label="Sign in" containerStyle={{
               height: 40,
               borderRadius: SIZES.radius,

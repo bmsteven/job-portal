@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text, Image } from "react-native"
+import { View, Text } from "react-native"
 import { images, SIZES, FONTS,COLORS } from "../../constants"
 import { TextButton, FormInput } from "../../components"
 import AuthLayout from "./AuthLayout"
@@ -14,11 +14,11 @@ const SignUp = ({navigation}) => {
     <AuthLayout title="Getting Started" 
     subtitle="Create an account to continue"
     >
-      <FormInput label="First name" placeholder="email@example.com" handleChange={handleChange} autoComplete="email" />
-      <FormInput label="Last name" placeholder="email@example.com" handleChange={handleChange} autoComplete="email" />
+      <FormInput label="First name" placeholder="email@example.com" handleChange={handleChange} autoComplete="name" />
+      <FormInput label="Last name" placeholder="email@example.com" handleChange={handleChange} autoComplete="name" />
       <FormInput label="Email" placeholder="email@example.com" handleChange={handleChange} autoComplete="email" />
-      <FormInput label="Username" placeholder="email@example.com" handleChange={handleChange} autoComplete="email" />
-      <FormInput label="Password" placeholder="email@example.com" handleChange={handleChange} autoComplete="email" />
+      <FormInput label="Username" placeholder="email@example.com" handleChange={handleChange} autoComplete="username" />
+      <FormInput label="Password" placeholder="email@example.com" handleChange={handleChange} autoComplete="password" secureTextEntry={true} />
       <TextButton label="Sign Up" containerStyle={{
               height: 40,
               borderRadius: SIZES.radius,
