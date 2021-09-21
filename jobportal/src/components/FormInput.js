@@ -4,6 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
+  View,
   Platform
 } from 'react-native';
 import Animated, { Clock, useCode, interpolateNode, EasingNode, Value, set } from 'react-native-reanimated';
@@ -46,8 +47,8 @@ const FormInput = ({
   handleChange,
   name,
   textInputStyle,
-  labelTextStyle,
   containerStyle,
+  secureTextEntry,
   isKeyboardInput = true,
   editable = true,
   value = '',
@@ -64,6 +65,7 @@ const FormInput = ({
 
   const [focusedLabel, _onFocusLabel] = useState(!!value);
   const [focused, _onFocusTextInput] = useState(!!value);
+  const [isPassword, setPassword] = useState(secureTextEntry ? true : false)
   const inputRef = createRef(null);
   const [animation, _] = useState(new Value(focusedLabel ? 1 : 0));
   const clock = new Clock();
@@ -84,6 +86,8 @@ const FormInput = ({
     [focusedLabel]
   )
 
+  
+
 //   useEffect(
 //     () => {
 //       if (!focusedLabel && value) {
@@ -99,7 +103,7 @@ const FormInput = ({
     const focusStyle = {
     top: interpolateNode(animation, {
       inputRange: [0, 1],
-      outputRange: [...getLabelPositions((textInputStyle || styles.textInput), (labelTextStyle || styles.label))]
+      outputRange: [...getLabelPositions((textInputStyle || styles.textInput), (customLabelStyles || styles.label))]
     }),
     fontSize: interpolateNode(animation, {
       inputRange: [0, 1],
@@ -127,7 +131,7 @@ const FormInput = ({
 
   return <TouchableOpacity style={[styles.container, containerStyle]} onPress={!isKeyboardInput && editable ? onPress : null} activeOpacity={!isKeyboardInput && editable ? 0.2 : 1}>
           {
-            <Animated.Text style={[styles.label, focusStyle, labelTextStyle, labelColorStyles, customLabelStyles]} onPress={() => { !focused ? inputRef?.current?.focus() : null }}>{label}</Animated.Text>
+            <Animated.Text style={[styles.label, focusStyle, customLabelStyles, labelColorStyles]} onPress={() => { !focused ? inputRef?.current?.focus() : null }}>{label}</Animated.Text>
           }
           <TextInput
             underlineColorAndroid={'rgba(0,0,0,0)'}
@@ -136,13 +140,26 @@ const FormInput = ({
             editable={isKeyboardInput && editable}
             style={[styles.textInput, textInputStyle, textInputColorStyles, customInputStyles]}
             value={value}
+            secureTextEntry={isPassword}
             onChangeText={e => handleChange(e, field=name)}
             pointerEvents={isKeyboardInput ? "auto" : "none"}
             onFocus={(e) => onExecution(e, () => { _onFocusLabel(true); _onFocusTextInput(true) }, onFocus)}
             onBlur={(e) => onExecution(e, () => { _onFocusLabel(!!value); _onFocusTextInput(false) }, onBlur)}
             ref={inputRef}
           />
+
           {/* toggle password */}
+         {secureTextEntry && 
+           <TouchableOpacity style={styles.togglePasswordStyle} onPress={() => setPassword(!isPassword)}>
+            <Text style={{
+              color: isPassword ? COLORS.primary : COLORS.gray2,
+              fontSize: SIZES.body5,
+            }}>
+              {isPassword ? "show" : "hide"}
+            </Text>
+          </TouchableOpacity>
+         }
+
         {!focused && error ? <Text style={[styles.errorText, { color: errorColor }, errorTextStyle]}>{error}</Text> : null}
       </TouchableOpacity>
 }
@@ -170,9 +187,15 @@ const styles = StyleSheet.create({
     zIndex: 1,
     paddingHorizontal: 5
   },
+  togglePasswordStyle: {
+    position: 'absolute',
+    right: 15,
+    zIndex: 1,
+    paddingHorizontal: 5,
+    top: 18
+  },
   errorText: {
     fontSize: 13,
-    paddingHorizontal: 15,
     paddingVertical: 5,
   }
 });

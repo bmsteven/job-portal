@@ -22,12 +22,10 @@ const [loading, setLoading] = useState(false)
     })
   }
 
-  console.log(formData);
-
   return (
     <AuthLayout title="Lets Sign You In" subtitle="Welcome back, please login to your account">
       <FormInput label="Username or email" placeholder="email@example.com" handleChange={handleChange} autoComplete="email" value={formData.username} name="username"/>
-      <FormInput label="Password" placeholder="email@example.com" handleChange={handleChange} autoComplete="password" secureTextEntry={true} value={formData.password} name="password" />
+      <FormInput label="Password" placeholder="email@example.com" handleChange={handleChange} autoComplete="password" secureTextEntry={true} value={formData.password} name="password" error="Weak password" />
       <TextButton label="Sign in" containerStyle={{
               height: 40,
               borderRadius: SIZES.radius,
