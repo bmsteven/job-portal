@@ -1,15 +1,19 @@
 import React from "react"
-import { View, ActivityIndicator, StyleSheet, Text } from "react-native"
+import { View, ActivityIndicator, StyleSheet, Image } from "react-native"
+import { images, COLORS } from "../constants"
 
 const Loader = () => {
   return (
     <View style={styles.container}>
-      <Text>Job Portal</Text>
-
+      <Image
+        style={styles.tinyLogo}
+        resizeMode="contain"
+        source={images.logo}
+      />
       <ActivityIndicator
         style={styles.activityIndicator}
         size="large"
-        color="#0000ff"
+        color={COLORS.secondary}
       />
     </View>
   )
@@ -24,6 +28,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#ffffff",
+  },
+  tinyLogo: {
+    width: 130,
+    height: 30,
   },
 })
 

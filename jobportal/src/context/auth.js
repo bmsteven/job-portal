@@ -1,10 +1,32 @@
 import React, { createContext, useReducer, useContext } from "react"
-import { AsyncStorage } from 'react-native';
+// import AsyncStorage from "@react-native-async-storage/async-storage"
 import { BACKEND } from "../utils/api"
-import {LOGIN, REGISTER, LOGOUT, COMPANIES, ADD_COMPANY, ADD_LOGO, EDIT_COMPANY, USERROLES, CATEGORIES, CATEGORIES_FAIL, ADD_DP, ADD_CV, ADD_PROFILE, AUTH, FAILED } from "./types"
+import {
+  LOGIN,
+  REGISTER,
+  LOGOUT,
+  COMPANIES,
+  ADD_COMPANY,
+  ADD_LOGO,
+  EDIT_COMPANY,
+  USERROLES,
+  CATEGORIES,
+  CATEGORIES_FAIL,
+  ADD_DP,
+  ADD_CV,
+  ADD_PROFILE,
+  AUTH,
+  FAILED,
+} from "./types"
 
 const AuthStateContext = createContext()
 const AuthDispatchContext = createContext()
+
+// let user = AsyncStorage.getItem("user")
+
+// if (!user) {
+//   AsyncStorage.setItem("user", "")
+// }
 
 const authReducer = (state, action) => {
   let { type, payload } = action
@@ -13,7 +35,7 @@ const authReducer = (state, action) => {
   let companyIndex
   switch (type) {
     case LOGIN:
-      AsyncStorage.setItem("user", JSON.stringify(payload))
+      // AsyncStorage.setItem("user", JSON.stringify(payload))
       return {
         ...state,
         isAuthenticated: true,
@@ -28,7 +50,7 @@ const authReducer = (state, action) => {
 
     // Logout
     case LOGOUT:
-      AsyncStorage.setItem("user", "")
+      // AsyncStorage.setItem("user", "")
       return {
         ...state,
         user: null,
@@ -52,7 +74,7 @@ const authReducer = (state, action) => {
       companiesCopy = [...state.companies]
       companyIndex = companiesCopy.findIndex((el) => el.id === payload.id)
       companiesCopy[companyIndex] = payload
-      console.log(payload, companiesCopy)
+      // console.log(payload, companiesCopy)
       return {
         ...state,
         companies: companiesCopy,
@@ -187,14 +209,14 @@ const authReducer = (state, action) => {
 
     // Get user data
     case AUTH:
-    //   userCopy = 
+      //   userCopy =
       return {
         ...state,
         user: payload,
         isAuthenticated: true,
         loading: false,
       }
-      
+
     case FAILED:
       return {
         ...state,
