@@ -1,31 +1,27 @@
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 
 let format = /[ `!@#$%^&*()+\-=\[\]{};':"\\|,<>\/?~]/
 
 const checkSymbols = (name, setError) => {
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    let isMounted = true
+    if(isMounted){ 
       let chars = format.exec(name)
       if (format.test(name))
-        setError({
-          msg: "Your username contains reserved character(s)",
-          type: "danger",
-        })
+        setError("Your username contains reserved character(s)")
       if (chars)
-        setError({
-          msg: `${chars[0]} is reserved character`,
-          type: "danger",
-        })
-    }, 50)
-    return () => clearTimeout(timeout)
-  }, [name])
+        setError(`${chars[0]} is reserved character`)
+    }
+    return () => {
+      isMounted = false
+    } 
+    }, [name])
   return null
 }
 
 export const checkChange = (name, setError) => {
   let chars = format.exec(name)
   if (!chars) setError(null)
-  console.log(chars, name)
   return null
 }
 

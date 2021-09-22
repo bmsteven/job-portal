@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 
 let format = /^\S+@\S+\.\S+$/
 
@@ -9,18 +9,17 @@ export const checkEmailChange = (name, setError) => {
 
 const checkMail = (name, setError) => {
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    let isMounted = true
+    if(isMounted)
       if (name) {
         let check = format.test(name)
         if (check) setError(null)
         if (!check)
-          setError({
-            type: "danger",
-            msg: "Invalid email",
-          })
+          setError("Invalid email")
       }
-    }, [50])
-    return () => clearTimeout(timeout)
+    return () => {
+      isMounted = false
+    }
   }, [name])
   return null
 }
