@@ -56,7 +56,6 @@ const authReducer = (state, action) => {
       dp = payload.dp.split("api")
       dp = BACKEND + "/api" + dp[1]
       toDataUrl(dp, (myBase64) => {
-        console.log(myBase64);
         AsyncStorage.setItem("dp", myBase64)
       })
       userCopy = {
