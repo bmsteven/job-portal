@@ -36,7 +36,6 @@ const authReducer = (state, action) => {
   switch (type) {
     case LOGIN:
       AsyncStorage.setItem("user", JSON.stringify(payload))
-
       return {
         ...state,
         isAuthenticated: true,

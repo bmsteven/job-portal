@@ -17,7 +17,7 @@ const Alert = () => {
     let timeout = () => {
         setTimeout(() => {
         close()
-        }, 40000)
+        }, 7000)
     }
 
     useEffect(() => {
