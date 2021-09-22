@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
+import { createStackNavigator, TransitionPresets } from "@react-navigation/stack"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { NavigationContainer } from "@react-navigation/native"
 import CustomDrawer from "./src/navigation/CustomDrawer"
@@ -17,6 +17,10 @@ import { Alert } from "./src/components"
 import {BACKEND} from "./src/utils/api"
 
 const Stack = createStackNavigator()
+
+const TransitionScreenOptions = {
+  ...TransitionPresets.SlideFromRightIOS, 
+};
 
 const App = () => {
   const { loading, user, isAuthenticated } = useAuthState()
@@ -64,17 +68,19 @@ const App = () => {
             <Stack.Navigator
               screenOptions={{
                 headerShown: false,
+                ...TransitionScreenOptions
               }}
-              initialRouteName={"Home"}
+              initialRouteName={"CustomDrawer"}
             >
               <Stack.Screen name="SignIn" component={SignIn} />
 
-              <Stack.Screen name="Home" component={CustomDrawer} />
+              <Stack.Screen name="CustomDrawer" children={CustomDrawer} />
             </Stack.Navigator>
           ) : (
             <Stack.Navigator
               screenOptions={{
                 headerShown: false,
+                ...TransitionScreenOptions
               }}
               initialRouteName={"OnBoarding"}
             >
@@ -86,7 +92,10 @@ const App = () => {
 
               <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
 
-              <Stack.Screen name="Home" component={CustomDrawer} />
+              <Stack.Screen name="CustomDrawer" children={(props) => { 
+                  return <CustomDrawer {...props} Stack={Stack}/>
+                }} 
+              />
             </Stack.Navigator>
           )}
         </>

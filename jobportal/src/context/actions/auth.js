@@ -21,7 +21,7 @@ export const login = ({setLoading, setError, formData, navigation, dispatch, ale
           }
         })
         setLoading(false)
-        navigation.navigate("Home")
+        navigation.navigate("CustomDrawer")
       })
       .catch((err) => {
         catchError({err, setLoading, dispatch: alertDispatch})

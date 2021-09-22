@@ -209,7 +209,7 @@ const SignUp = ({ navigation }) => {
       />
       <TextButton 
         label="Skip" 
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate("CustomDrawer")}
         containerStyle={{
           backgroundColor: null
         }}

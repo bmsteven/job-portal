@@ -71,7 +71,7 @@ const OnBoarding = ({ navigation }) => {
               textAlign: "center",
             }}
           >
-            Get started today, apply and save your favourite jobs, create company and start getting personels of your choice.
+            Get started today, apply and save your favourite jobs, register company and start getting personnels of your choice.
           </Text>
         </View>
 
@@ -98,7 +98,7 @@ const OnBoarding = ({ navigation }) => {
           />
           <TextButton 
             label="Skip" 
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => navigation.navigate("CustomDrawer")}
             containerStyle={{
               backgroundColor: null
             }}

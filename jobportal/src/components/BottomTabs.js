@@ -200,9 +200,9 @@ const BottomTabs = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={[styles.alertContainer]}>
-              <CustomTab label="Jobs" icon={icons.jobs} isSelected={selected === "Jobs" ? true : false} outerContainerStyle={jobsTabOuterStyle} innerContainerStyle={jobsTabInnerStyle} tintColorStyle={jobsTabTintColorStyle} outerStyle={jobsTabOuterStyleOuter} textStyle={jobsTextStyle} />
-              <CustomTab label="Home" icon={icons.home} isSelected={selected === "Home" ? true : false} outerContainerStyle={homeTabOuterStyle} innerContainerStyle={homeTabInnerStyle} tintColorStyle={homeTabTintColorStyle} outerStyle={homeTabOuterStyleOuter} textStyle={homeTextStyle}/>
-              <CustomTab label="Companies" icon={icons.companies} isSelected={selected === "Companies" ? true : false} outerContainerStyle={companiesTabOuterStyle} innerContainerStyle={companiesTabInnerStyle} tintColorStyle={companiesTabTintColorStyle} outerStyle={companiesTabOuterStyleOuter} textStyle={companiesTextStyle}/>
+              <CustomTab label="Jobs" icon={icons.jobs} isSelected={selected === "Jobs" ? true : false} outerContainerStyle={jobsTabOuterStyle} innerContainerStyle={jobsTabInnerStyle} tintColorStyle={jobsTabTintColorStyle} outerStyle={jobsTabOuterStyleOuter} textStyle={jobsTextStyle} navigation={navigation}/>
+              <CustomTab label="Home" icon={icons.home} isSelected={selected === "Home" ? true : false} outerContainerStyle={homeTabOuterStyle} innerContainerStyle={homeTabInnerStyle} tintColorStyle={homeTabTintColorStyle} outerStyle={homeTabOuterStyleOuter} textStyle={homeTextStyle} navigation={navigation} />
+              <CustomTab label="Companies" icon={icons.companies} isSelected={selected === "Companies" ? true : false} outerContainerStyle={companiesTabOuterStyle} innerContainerStyle={companiesTabInnerStyle} tintColorStyle={companiesTabTintColorStyle} outerStyle={companiesTabOuterStyleOuter} textStyle={companiesTextStyle} navigation={navigation}/>
             </View>
         </View>
     )

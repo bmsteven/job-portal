@@ -5,7 +5,7 @@ import {COLORS, SIZES, FONTS, icons} from "../constants"
 import {useUIDispatch} from "../context/UI"
 import {SELECTED} from "../context/types"
 
-const CustomTab = ({label, icon, isSelected, outerStyle, textStyle, outerContainerStyle, innerContainerStyle, tintColorStyle}) => {
+const CustomTab = ({label, icon, isSelected, outerStyle, textStyle, outerContainerStyle, innerContainerStyle, tintColorStyle, navigation}) => {
     const dispatch = useUIDispatch()
     return (
         <Animated.View 
@@ -18,10 +18,13 @@ const CustomTab = ({label, icon, isSelected, outerStyle, textStyle, outerContain
                 
         >
             <TouchableWithoutFeedback 
-                onPress={() => dispatch({
-                    type: SELECTED,
-                    payload: label
-                })}
+                onPress={() => {
+                    dispatch({
+                        type: SELECTED,
+                        payload: label
+                    })
+                    navigation.navigate(label)
+                }}
             >
                 <View style={{
                         justifyContent: "center",

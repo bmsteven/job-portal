@@ -13,12 +13,12 @@ const CustomDrawer = () => {
     
     const scale = Animated.interpolateNode(progress, {
         inputRange: [0, 1],
-        outputRange: [1, 0.8]
+        outputRange: [1, 0.85]
     })
 
     const borderRadius = Animated.interpolateNode(progress, {
         inputRange: [0, 1],
-        outputRange: [0, SIZES.radius * 2]
+        outputRange: [0, 32]
     })
 
     const animatedStyle = {borderRadius, transform: [{scale}]}
@@ -33,7 +33,7 @@ const CustomDrawer = () => {
                 overlayColor="transparent"
                 drawerStyle={{
                     flex: 1,
-                    width: "70%",
+                    width: "60%",
                     backgroundColor: "transparent"
                 }}
                 sceneContainerStyle={{

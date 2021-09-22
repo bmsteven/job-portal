@@ -15,17 +15,33 @@ const Header = ({
             padding: SIZES.padding
         }}>
             {/* menu */}
-            {back ? <TouchableOpacity onPress={() => navigation.goBack()}>
+            {back ? <TouchableOpacity onPress={() => navigation.goBack()}  style={{
+                    width: 45,
+                    height: 45,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: COLORS.white2,
+                    borderRadius: SIZES.radius
+                }}>
                 <Image source={icons.back} style={{
-                    width: 40,
-                    height: 40,
+                    width: 35,
+                    height: 35,
                     resizeMode: "contain",
                     tintColor: COLORS.gray
                 }}/>
-            </TouchableOpacity> : <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            </TouchableOpacity> : <TouchableOpacity onPress={() => navigation.openDrawer()}
+                style={{
+                    width: 45,
+                    height: 45,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: COLORS.white2,
+                    borderRadius: SIZES.radius
+                }}
+            >
                 <Image source={icons.menu} style={{
-                    width: 40,
-                    height: 40,
+                    width: 35,
+                    height: 35,
                     resizeMode: "contain",
                     tintColor: COLORS.gray
                 }} />
