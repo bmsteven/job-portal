@@ -1,13 +1,28 @@
-import React from  "react"
+import React, {useState} from  "react"
 import {View, Text, TouchableOpacity, Image} from "react-native"
 import {createDrawerNavigator} from "@react-navigation/drawer"
+import Animated from 'react-native-reanimated';
 import {MainLayout} from "../screens"
 import CustomDrawerContent from "./CustomDrawerContent"
-import {COLORS} from "../constants"
+import {COLORS, SIZES} from "../constants"
 
 const Drawer = createDrawerNavigator()
 
 const CustomDrawer = () => {
+    const [progress, setProgress] = useState(new Animated.Value(0))
+    
+    const scale = Animated.interpolateNode(progress, {
+        inputRange: [0, 1],
+        outputRange: [1, 0.8]
+    })
+
+    const borderRadius = Animated.interpolateNode(progress, {
+        inputRange: [0, 1],
+        outputRange: [0, SIZES.radius * 2]
+    })
+
+    const animatedStyle = {borderRadius, transform: [{scale}]}
+    
     return (
         <View style={{
             flex: 1,
@@ -26,13 +41,16 @@ const CustomDrawer = () => {
                 }}
                 initialRouteName="MainLayout"
                 drawerContent={props => {
+                    setTimeout(() => {
+                        setProgress(props.progress)
+                    }, 0);
                     return (
                         <CustomDrawerContent navigation={props.navigation} />
                     )
                 }}
             >
                 <Drawer.Screen name="MainLayout">
-                    {props => <MainLayout {...props} />}
+                    {props => <MainLayout {...props} drawerAnimationStyle={animatedStyle} />}
                 </Drawer.Screen>
             </Drawer.Navigator>
         </View>

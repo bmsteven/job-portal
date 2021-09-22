@@ -16,4 +16,5 @@ export const LOAD_DP = "LOAD_DP"
 export const FAILED = "FAILED"
 export const ADD = "ADD"
 export const REMOVE = "REMOVE"
+export const SELECTED = "SELECTED"
 

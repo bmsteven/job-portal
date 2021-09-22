@@ -1,28 +1,18 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, TouchableOpacity } from "react-native"
-import {logout} from "../../context/actions/auth"
-import {useAuthDispatch} from "../../context/auth"
+import Animated from "react-native-reanimated"
+import { BottomTabsScreen } from "../authScreens"
 
-const MainLayout = ({navigation}) => {
-  const dispatch = useAuthDispatch()
-  const clicked = () => {
-    logout({
-      dispatch,
-      navigation
-    })
-  }
+const MainLayout = ({navigation, drawerAnimationStyle}) => {
   return (
-    <View style={{
+    <Animated.View style={{
+      backgroundColor: "white",
       flex: 1,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      // backgroundColor: "white"
+      ...drawerAnimationStyle
     }}>
-      <TouchableOpacity onPress={clicked} style={{zIndex: 3}}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
-    </View>
+      {/* pretty muc everything else */}
+      <BottomTabsScreen navigation={navigation} />
+    </Animated.View>
   )
 }
 

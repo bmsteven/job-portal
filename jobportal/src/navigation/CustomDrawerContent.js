@@ -2,32 +2,43 @@ import React from 'react'
 import {View, Text, Image, TouchableOpacity} from "react-native"
 import {DrawerContentScrollView} from "@react-navigation/drawer"
 import {COLORS, FONTS, SIZES, icons} from "../constants"
-import {useAuthState} from "../context/auth"
+import {useAuthState, useAuthDispatch} from "../context/auth"
+import {logout} from "../context/actions/auth"
 
-const CustomDrawerItem = ({icon, label, isSelected}) => {
+const CustomDrawerItem = ({icon, label, isSelected, onPress}) => {
     return <TouchableOpacity style={{
-        marginVertical: SIZES.padding / 2.7,
-        flexDirection: "row",
-        alignItems: "center"
-    }}>
-        {icon && <View style={{
-            marginRight: SIZES.padding
-        }}>
-            <Image source={icon} style={{
-                tintColor: COLORS.white2,
-                height: 20,
-                width: 20
-            }} />
-        </View>}
-        {label && <Text style={{
-            color: COLORS.white2,
-            ...FONTS.body3
-        }}>{label}</Text>}
-    </TouchableOpacity>
+                    marginVertical: SIZES.padding / 2.7,
+                    flexDirection: "row",
+                    alignItems: "center"
+                }}
+                onPress={onPress}
+            >
+                {icon && <View style={{
+                    marginRight: SIZES.padding
+                }}>
+                    <Image source={icon} style={{
+                        tintColor: COLORS.white2,
+                        height: 20,
+                        width: 20
+                    }} />
+                </View>}
+                {label && <Text style={{
+                    color: COLORS.white2,
+                    ...FONTS.body3
+                }}>{label}</Text>}
+            </TouchableOpacity>
 }
 
 const CustomDrawerContent = ({ navigation }) => {
     const { user } = useAuthState()
+    const dispatch = useAuthDispatch()
+    const clicked = () => {
+        logout({
+            dispatch,
+            navigation
+        })
+    }
+
     return (
         <View style={{
             flex: 1,
@@ -48,7 +59,8 @@ const CustomDrawerContent = ({ navigation }) => {
                 }}>
                     <Image source={icons.cross} style={{
                         width: 25,
-                        height: 25
+                        height: 25,
+                        resizeMode: "cover"
                     }} />
                 </TouchableOpacity>
             </View>
@@ -96,8 +108,12 @@ const CustomDrawerContent = ({ navigation }) => {
                     // height: 300,
                     marginVertical: SIZES.padding
                 }}>
-                    <CustomDrawerItem label="My Applications" />
-                    <CustomDrawerItem label="Saved Jobs" />
+                    <CustomDrawerItem label="My Applications" onPress={() => {
+                        console.log("pressed");
+                    }}/>
+                    <CustomDrawerItem label="Saved Jobs" onPress={() => {
+                        console.log("pressed");
+                    }}/>
                 </View>
                 <View style={{
                     backgroundColor: COLORS.gray,
@@ -109,21 +125,24 @@ const CustomDrawerContent = ({ navigation }) => {
                     marginVertical: SIZES.padding,
                     flex: 2
                 }}>
-                    <CustomDrawerItem label="Profile" icon={icons.profile} />
-                    <CustomDrawerItem label="Edit Profile" icon={icons.edit}/>
-                    <CustomDrawerItem label="Setting" icon={icons.setting} />
-                    <CustomDrawerItem label="Help" icon={icons.help} />
+                    <CustomDrawerItem label="Profile" icon={icons.profile} onPress={() => {
+                        console.log("pressed");
+                    }}/>
+                    <CustomDrawerItem label="Edit Profile" icon={icons.edit} onPress={() => {
+                        console.log("pressed");
+                    }}/>
+                    <CustomDrawerItem label="Setting" icon={icons.setting} onPress={() => {
+                        console.log("pressed");
+                    }} />
+                    <CustomDrawerItem label="Help" icon={icons.help} onPress={() => {
+                        console.log("pressed");
+                    }} />
                 </View>
-                {/* <View style={{
-                    backgroundColor: COLORS.gray,
-                    height: 1,
-                    width: SIZES.width * 0.25,
-                }}/> */}
                 {/* logout */}
                 <View style={{
                     marginVertical: SIZES.padding
                 }}>
-                    <CustomDrawerItem label="Logout" icon={icons.logout}/>
+                    <CustomDrawerItem label="Logout" icon={icons.logout} onPress={clicked} />
                 </View>
 
             </DrawerContentScrollView>
