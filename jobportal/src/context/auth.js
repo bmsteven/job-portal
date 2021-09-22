@@ -16,6 +16,7 @@ import {
   ADD_CV,
   ADD_PROFILE,
   AUTH,
+  LOAD_DP,
   FAILED,
 } from "./types"
 
@@ -28,14 +29,36 @@ if (!user) {
   AsyncStorage.setItem("user", "")
 }
 
+const reader = new FileReader()
+
+function toDataUrl(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        reader.onloadend = function() {
+            callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+  }
+
 const authReducer = (state, action) => {
   let { type, payload } = action
   let userCopy
   let companiesCopy
   let companyIndex
+  let dp, userDp
   switch (type) {
     case LOGIN:
       AsyncStorage.setItem("user", JSON.stringify(payload))
+      dp = payload.dp.split("api")
+      dp = BACKEND + "/api" + dp[1]
+      toDataUrl(dp, (myBase64) => {
+        console.log(myBase64);
+        AsyncStorage.setItem("dp", myBase64)
+      })
       return {
         ...state,
         isAuthenticated: true,
@@ -52,6 +75,7 @@ const authReducer = (state, action) => {
     // Logout
     case LOGOUT:
       AsyncStorage.setItem("user", "")
+      AsyncStorage.setItem("dp", "")
       return {
         ...state,
         user: null,
@@ -75,7 +99,6 @@ const authReducer = (state, action) => {
       companiesCopy = [...state.companies]
       companyIndex = companiesCopy.findIndex((el) => el.id === payload.id)
       companiesCopy[companyIndex] = payload
-      // console.log(payload, companiesCopy)
       return {
         ...state,
         companies: companiesCopy,
@@ -210,11 +233,26 @@ const authReducer = (state, action) => {
 
     // Get user data
     case AUTH:
+      userCopy = payload
       return {
         ...state,
-        user: payload,
+        user: userCopy,
         isAuthenticated: true,
         loading: false,
+      }
+
+    case LOAD_DP:
+      userDp = payload
+      userCopy = {
+        ...state.user,
+        userDp
+      }
+
+      return {
+        ...state,
+        user: userCopy,
+        isAuthenticated: true,
+        loading: false
       }
 
     case FAILED:

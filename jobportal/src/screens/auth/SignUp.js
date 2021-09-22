@@ -76,11 +76,25 @@ const SignUp = ({ navigation }) => {
   const submit = () => {
     if(username.trim().length < 3) { 
       setUsernameErr("This field shouldn't be empty")
-      setError("There are errors in your form")
+      dispatch({
+        type: ADD,
+        payload: {
+          type: "danger",
+          message: "There are error(s) in your form"
+        }
+      })
+      setError("There are error(s) in your form")
       return
     }
     if(password.trim().length < 6) {
       setErrors({ ...errors, password: "Your password is weak" })
+      dispatch({
+        type: ADD,
+          payload: {
+            type: "danger",
+            message: "There are error(s) in your form"
+          }
+      })
       setError("There are errors in your form")
       return
     }
@@ -88,6 +102,13 @@ const SignUp = ({ navigation }) => {
       setErrors({
         ...errors,
         firstname: "Atleast two(2) characters required",
+      })
+      dispatch({
+        type: ADD,
+          payload: {
+            type: "danger",
+            message: "There are error(s) in your form"
+          }
       })
       setError("There are errors in your form")
       return
@@ -97,19 +118,33 @@ const SignUp = ({ navigation }) => {
         ...errors,
         lastname: "Atleast two(2) characters required",
       })
+      dispatch({
+        type: ADD,
+          payload: {
+            type: "danger",
+            message: "There are error(s) in your form"
+          }
+      })
       setError("There are errors in your form")
       return
     }
     if(email.trim().length < 3) {
       setEmailErr("Invalid email address")
+      dispatch({
+        type: ADD,
+          payload: {
+            type: "danger",
+            message: "There are error(s) in your form"
+          }
+      })
       setError("There are errors in your form")
       return
     }
-    register({
-      setError,
+   register({
       setLoading,
+      setError,
       formData,
-      navigation, 
+      navigation,
       dispatch
     })
   }
@@ -118,7 +153,7 @@ const SignUp = ({ navigation }) => {
   checkSymbols(username, setUsernameErr)
 
   useEffect(() => {
-    if(error || errors || usernameErr || emailErr || username.trim().length === 0 || password.trim().length === 0 || firstname.trim().length === 0 || lastname.trim().length === 0 || email.trim().length === 0 ) {
+    if(error || errors?.firstname || errors?.lastname || errors?.password || usernameErr || emailErr || username.trim().length === 0 || password.trim().length === 0 || firstname.trim().length === 0 || lastname.trim().length === 0 || email.trim().length === 0 ) {
       setDisabled(true)
     } else if(loading) {
       setDisabled(true)
@@ -145,7 +180,8 @@ const SignUp = ({ navigation }) => {
           marginVertical: SIZES.padding,
           backgroundColor: disabled ? COLORS.transparentPrimray : COLORS.secondary
         }}
-        disabled={loading}
+        disabled={disabled}
+        onPress={submit}
       />
 
       <View style={{

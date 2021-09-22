@@ -152,7 +152,7 @@ const FormInput = ({
          {secureTextEntry && 
            <TouchableOpacity style={styles.togglePasswordStyle} onPress={() => setPassword(!isPassword)}>
             <Text style={{
-              color: isPassword ? COLORS.primary : COLORS.gray2,
+              color: isPassword ? COLORS.gray2 : COLORS.primary,
               fontSize: SIZES.body5,
             }}>
               {isPassword ? "show" : "hide"}

@@ -1,7 +1,7 @@
 import React from "react"
 import axios from "axios"
 import { API } from "../../utils/api"
-import { AUTH, FAILED, LOGIN, REGISTER, ADD } from "../types"
+import { AUTH, FAILED, LOGIN, REGISTER, ADD, LOGOUT } from "../types"
 
 export const login = ({setLoading, setError, formData, navigation, dispatch, alertDispatch}) => {
     setLoading(true)
@@ -28,13 +28,19 @@ export const login = ({setLoading, setError, formData, navigation, dispatch, ale
       })
 }
 
-export const register = ({setLoading, setError, navigation, formData, dispatch}) => {
+export const register = ({setLoading, navigation, formData, dispatch}) => {
     setLoading(true)
-    setError(null)     
     axios
-      .post(`${API}/register`, formData)
+      .post(`${API}/users/register`, formData)
       .then((res) => {
         setLoading(false)
+        dispatch({
+          type: ADD,
+          payload: {
+            type: "success",
+            message: `You have successfully registered, an email was sent to you for account verification`
+          }
+        })
         navigation.navigate("SignIn")
       })
       .catch((err) => {
@@ -48,8 +54,11 @@ export const forgotPassword = ({ email, setLoading, setError, navigation, dispat
     }
 }
 
-export const logout = () => {
-  
+export const logout = ({dispatch, navigation}) => {
+  dispatch({
+    type: LOGOUT
+  })
+  navigation.navigate("SignIn")
 }
 
 export const catchError = ({err, setLoading, dispatch}) => {

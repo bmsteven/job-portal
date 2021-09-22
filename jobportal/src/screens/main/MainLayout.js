@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, TouchableOpacity } from "react-native"
+import {logout} from "../../context/actions/auth"
 import {useAuthDispatch} from "../../context/auth"
 
-const MainLayout = ({ navigation }) => {
+const MainLayout = ({navigation}) => {
   const dispatch = useAuthDispatch()
-  const logout = () => {
-        dispatch({
-          type: "LOGOUT",
-        })
-        navigation.navigate("SignIn")
+  const clicked = () => {
+    logout({
+      dispatch,
+      navigation
+    })
   }
   return (
-    <View>
-      <Text>Home</Text>
-      <TouchableOpacity
-        onPress={logout}
-      >
-        <Text>
-          Logout
-        </Text>
+    <View style={{
+      flex: 1,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      // backgroundColor: "white"
+    }}>
+      <TouchableOpacity onPress={clicked} style={{zIndex: 3}}>
+        <Text>Logout</Text>
       </TouchableOpacity>
     </View>
   )

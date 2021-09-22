@@ -9,7 +9,7 @@ const TextButton = ({ containerStyle, label, labelStyle, onPress, disabled }) =>
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: COLORS.secondary,
-        marginBottom: SIZES.padding,
+        marginBottom: SIZES.padding / 2,
         ...containerStyle,
       }}
       disabled={disabled}

@@ -2,8 +2,8 @@ import React, { useEffect } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { NavigationContainer } from "@react-navigation/native"
+import CustomDrawer from "./src/navigation/CustomDrawer"
 import {
-  MainLayout,
   OnBoarding,
   SignIn,
   SignUp,
@@ -12,8 +12,9 @@ import {
 } from "./src/screens/index"
 import { useAuthDispatch, useAuthState } from "./src/context/auth"
 import { useAlertState } from "./src/context/alert"
-import { FAILED, AUTH } from "./src/context/types"
+import { FAILED, AUTH, LOAD_DP } from "./src/context/types"
 import { Alert } from "./src/components"
+import {BACKEND} from "./src/utils/api"
 
 const Stack = createStackNavigator()
 
@@ -39,6 +40,18 @@ const App = () => {
         })
       }
     })
+    AsyncStorage.getItem("dp", (err, value) => {
+      if (value) {
+        dispatch({
+          type: LOAD_DP,
+          payload: value,
+        })
+      } else {
+        dispatch({
+          type: FAILED,
+        })
+      }
+    })
   }
 
   return (
@@ -54,7 +67,9 @@ const App = () => {
               }}
               initialRouteName={"Home"}
             >
-              <Stack.Screen name="Home" component={MainLayout} />
+              <Stack.Screen name="SignIn" component={SignIn} />
+
+              <Stack.Screen name="Home" component={CustomDrawer} />
             </Stack.Navigator>
           ) : (
             <Stack.Navigator
@@ -71,7 +86,7 @@ const App = () => {
 
               <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
 
-              <Stack.Screen name="Home" component={MainLayout} />
+              <Stack.Screen name="Home" component={CustomDrawer} />
             </Stack.Navigator>
           )}
         </>
