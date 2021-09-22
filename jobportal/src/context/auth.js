@@ -59,10 +59,14 @@ const authReducer = (state, action) => {
         console.log(myBase64);
         AsyncStorage.setItem("dp", myBase64)
       })
+      userCopy = {
+        ...payload,
+        dp
+      }
       return {
         ...state,
         isAuthenticated: true,
-        user: payload,
+        user: userCopy,
         loading: false,
       }
       
@@ -233,7 +237,9 @@ const authReducer = (state, action) => {
 
     // Get user data
     case AUTH:
-      userCopy = payload
+        dp = payload.dp.split("api")
+        dp = BACKEND + "/api" + dp[1]
+      userCopy = {...payload, dp}
       return {
         ...state,
         user: userCopy,

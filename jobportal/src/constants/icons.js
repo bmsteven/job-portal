@@ -15,6 +15,9 @@ const logout = require("../assets/icons/logout.png")
 const profile = require("../assets/icons/profile.png")
 const setting = require("../assets/icons/setting.png")
 const help = require("../assets/icons/help.png")
+const about = require("../assets/icons/about.png")
+const login = require("../assets/icons/login.png")
+const register = require("../assets/icons/register.png")
 
 export default {
     cross,
@@ -33,4 +36,7 @@ export default {
     profile,
     setting,
     help,
+    about,
+    login,
+    register
 }

@@ -30,7 +30,7 @@ const CustomDrawerItem = ({icon, label, isSelected, onPress}) => {
 }
 
 const CustomDrawerContent = ({ navigation }) => {
-    const { user } = useAuthState()
+    const { user, isAuthenticated } = useAuthState()
     const dispatch = useAuthDispatch()
     const clicked = () => {
         logout({
@@ -66,7 +66,7 @@ const CustomDrawerContent = ({ navigation }) => {
             </View>
 
             {/* profile card */}
-            <View>
+            {isAuthenticated && <View>
                 <TouchableOpacity style={{
                     flexDirection: "row",
                     justifyContent: "flex-start",
@@ -79,7 +79,12 @@ const CustomDrawerContent = ({ navigation }) => {
                         width: 45,
                         borderRadius: SIZES.radius / 2
                     }}>
-                        <Image source={{ uri: user?.userDp}} />
+                        <Image source={{ uri: user?.dp}} style={{
+                            height: 45,
+                            width: 45,
+                            resizeMode: "cover",
+                            borderRadius: SIZES.radius / 2
+                        }} />
                     </View>
                     <View style={{
                         paddingHorizontal: SIZES.padding
@@ -95,7 +100,7 @@ const CustomDrawerContent = ({ navigation }) => {
                         }}>@{user?.username}</Text>
                     </View>
                 </TouchableOpacity>
-            </View>
+            </View>}
 
             <DrawerContentScrollView
                 scrollEnabled={true}
@@ -104,7 +109,7 @@ const CustomDrawerContent = ({ navigation }) => {
                 }}
             >
                 {/* user jobs */}
-                <View style={{
+               {isAuthenticated && <><View style={{
                     // height: 300,
                     marginVertical: SIZES.padding
                 }}>
@@ -120,12 +125,14 @@ const CustomDrawerContent = ({ navigation }) => {
                     height: 1,
                     width: SIZES.width * 0.25,
                 }}/>
+                </>
+                }
                 {/* user profile */}
                 <View style={{
                     marginVertical: SIZES.padding,
                     flex: 2
                 }}>
-                    <CustomDrawerItem label="Profile" icon={icons.profile} onPress={() => {
+                    {isAuthenticated ? <><CustomDrawerItem label="Profile" icon={icons.profile} onPress={() => {
                         console.log("pressed");
                     }}/>
                     <CustomDrawerItem label="Edit Profile" icon={icons.edit} onPress={() => {
@@ -134,16 +141,27 @@ const CustomDrawerContent = ({ navigation }) => {
                     <CustomDrawerItem label="Setting" icon={icons.setting} onPress={() => {
                         console.log("pressed");
                     }} />
+                    </> : <>
+                         <CustomDrawerItem label="Sign In" icon={icons.login} onPress={() => {
+                            navigation.navigate("SignIn");
+                        }} />
+                         <CustomDrawerItem label="Sign Up" icon={icons.register} onPress={() => {
+                            navigation.navigate("SignUp");
+                        }} />
+                    </>}
+                     <CustomDrawerItem label="About" icon={icons.about} onPress={() => {
+                        console.log("pressed");
+                    }} />
                     <CustomDrawerItem label="Help" icon={icons.help} onPress={() => {
                         console.log("pressed");
                     }} />
                 </View>
                 {/* logout */}
-                <View style={{
+                {isAuthenticated && <View style={{
                     marginVertical: SIZES.padding
                 }}>
                     <CustomDrawerItem label="Logout" icon={icons.logout} onPress={clicked} />
-                </View>
+                </View>}
 
             </DrawerContentScrollView>
         </View>

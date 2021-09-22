@@ -49,7 +49,11 @@ const Header = ({
                 width: 45,
                 borderRadius: SIZES.radius / 2
             }}>
-                <Image source={{ uri: user?.userDp}} />
+                <Image source={{ uri: user?.dp}} style={{
+                height: 45,
+                width: 45,
+                borderRadius: SIZES.radius / 2
+            }}/>
             </TouchableOpacity>: <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
                 <Text style={{
                     ...FONTS.body3
