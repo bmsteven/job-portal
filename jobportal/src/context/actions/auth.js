@@ -1,72 +1,88 @@
 import React from "react"
 import axios from "axios"
 import { API } from "../../utils/api"
-import { AUTH, FAILED, LOGIN, REGISTER } from "../types"
-import { useAuthDispatch } from "../auth"
+import { AUTH, FAILED, LOGIN, REGISTER, ADD } from "../types"
 
-export const login = ({setLoading, setError, formdata, navigation}) => {
+export const login = ({setLoading, setError, formData, navigation, dispatch, alertDispatch}) => {
     setLoading(true)
-    const dispatch = useAuthDispatch()
-    setError()
+    setError(null)
      axios
       .post(`${API}/login`, formData)
       .then((res) => {
-        console.log(res.data);
         dispatch({
           type: LOGIN,
           payload: res.data,
         })
-        setLoading(false)
-        navigation.navigate("Home")
-      })
-      .catch((err) => {
-        setLoading(false)
-        if (err?.response) {
-          setError(err?.response?.data?.message)
-        } else if (err?.message) {
-          if (err?.code === "ECONNREFUSED") {
-            setError("Failed to connect, please try again")
-          } else {
-            setError(err?.message)
+        alertDispatch({
+          type: ADD,
+          payload: {
+            type: "success",
+            message: `Logged in as ${res.data?.username}`
           }
-        } else {
-          setError("Internal server error, please try again")
-        }
-      })
-}
-
-export const register = ({setLoading, setError, navigation, formData}) => {
-    setLoading(true)
-    setError(null)
-    const dispatch = useAuthDispatch()
-     axios
-      .post(`${API}/register`, formData)
-      .then((res) => {
-        console.log(res.data);
-        dispatch({
-          type: REGISTER,
-          payload: res.data,
         })
         setLoading(false)
+        // navigation.navigate("Home")
       })
       .catch((err) => {
-        setLoading(false)
-        if (err?.response) {
-            setError(err?.response?.data?.message)
-        } else if (err?.message) {
-        if (err?.code === "ECONNREFUSED") {
-            setError("Failed to connect, please try again")
-        } else {
-            setError(err?.message)
-        }
-        } else {
-            setError("Internal server error, please try again")
-        }
+        catchError({err, setLoading, dispatch: alertDispatch})
       })
 }
 
-export const forgotPassword = ({ email, setLoading, setError }) => {
+export const register = ({setLoading, setError, navigation, formData, dispatch}) => {
+    setLoading(true)
+    setError(null)     
+    axios
+      .post(`${API}/register`, formData)
+      .then((res) => {
+        setLoading(false)
+        navigation.navigate("SignIn")
+      })
+      .catch((err) => {
+        catchError({err, setLoading, dispatch})
+      })
+}
+
+export const forgotPassword = ({ email, setLoading, setError, navigation, dispatch}) => {
     const body = {
         email
     }
+}
+
+export const catchError = ({err, setLoading, dispatch}) => {
+  setLoading(false)
+  if (err?.response) {
+    dispatch({
+      type: ADD,
+      payload: {
+        type: "danger",
+        message: err?.response?.data?.message
+      }
+    })
+  } else if (err?.message) {
+    if (err?.code === "ECONNREFUSED") {
+      dispatch({
+        type: ADD,
+        payload: {
+          type: "danger",
+          message: "Failed to connect, please try again"
+        }
+      })
+    } else {
+        dispatch({
+          type: ADD,
+          payload: {
+            type: "danger",
+            message: err?.message
+          }
+        })
+    }
+  } else {
+    dispatch({
+      type: ADD,
+      payload: {
+        type: "danger",
+        message: "Internal server error, please try again"
+      }
+    })
+  }
 }

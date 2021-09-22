@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext } from "react"
-// import AsyncStorage from "@react-native-async-storage/async-storage"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import { BACKEND } from "../utils/api"
 import {
   LOGIN,
@@ -22,11 +22,11 @@ import {
 const AuthStateContext = createContext()
 const AuthDispatchContext = createContext()
 
-// let user = AsyncStorage.getItem("user")
+let user = AsyncStorage.getItem("user")
 
-// if (!user) {
-//   AsyncStorage.setItem("user", "")
-// }
+if (!user) {
+  AsyncStorage.setItem("user", "")
+}
 
 const authReducer = (state, action) => {
   let { type, payload } = action
@@ -35,13 +35,15 @@ const authReducer = (state, action) => {
   let companyIndex
   switch (type) {
     case LOGIN:
-      // AsyncStorage.setItem("user", JSON.stringify(payload))
+      AsyncStorage.setItem("user", JSON.stringify(payload))
+
       return {
         ...state,
         isAuthenticated: true,
         user: payload,
         loading: false,
       }
+      
     case REGISTER:
       return {
         ...state,
@@ -50,7 +52,7 @@ const authReducer = (state, action) => {
 
     // Logout
     case LOGOUT:
-      // AsyncStorage.setItem("user", "")
+      AsyncStorage.setItem("user", "")
       return {
         ...state,
         user: null,
@@ -209,7 +211,6 @@ const authReducer = (state, action) => {
 
     // Get user data
     case AUTH:
-      //   userCopy =
       return {
         ...state,
         user: payload,

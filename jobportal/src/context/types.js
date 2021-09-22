@@ -13,3 +13,6 @@ export const ADD_CV = "ADD_CV"
 export const ADD_PROFILE = "ADD_PROFILE"
 export const AUTH = "AUTH"
 export const FAILED = "FAILED"
+export const ADD = "ADD"
+export const REMOVE = "REMOVE"
+

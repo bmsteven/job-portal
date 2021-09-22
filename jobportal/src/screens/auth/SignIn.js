@@ -4,22 +4,22 @@ import { SIZES, FONTS, COLORS } from "../../constants"
 import { TextButton, FormInput } from "../../components"
 import AuthLayout from "./AuthLayout"
 import { login } from "../../context/actions/auth"
+import { useAuthDispatch } from "../../context/auth"
+import { useAlertDispatch } from "../../context/alert"
 
 const SignIn = ({ navigation }) => {
+  const [usernameErr, setUsernameErr] = useState(null)
+  const [passwordErr, setPasswordErr] = useState(null)
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [disabled, setDisabled] = useState(true)
+  const dispatch = useAuthDispatch()
+  const alertDispatch = useAlertDispatch()
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   })
-
   const { username, password } = formData
-
-  const [usernameErr, setUsernameErr] = useState(null)
-  const [passwordErr, setPasswordErr] = useState(null)
-
-  const [error, setError] = useState(null)
-
-  const [loading, setLoading] = useState(false)
-  const [disabled, setDisabled] = useState(true)
 
   const handleChange = (e, field) => {
     setFormData({
@@ -27,6 +27,7 @@ const SignIn = ({ navigation }) => {
       [field]: e
     })
     setError(null)
+
     if(field === "username" && e.trim().length === 0) { 
       setUsernameErr("This field shouldn't be empty")
     }
@@ -50,7 +51,9 @@ const SignIn = ({ navigation }) => {
       setLoading,
       setError,
       formData,
-      navigation
+      navigation,
+      dispatch,
+      alertDispatch
     })
   }
 
@@ -63,6 +66,8 @@ const SignIn = ({ navigation }) => {
       setDisabled(false)
     }
   }, [formData, loading])
+
+  console.log(error)
 
   return (
     <AuthLayout title="Lets Sign You In" subtitle="Welcome back, please login to your account">

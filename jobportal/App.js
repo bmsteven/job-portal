@@ -11,12 +11,15 @@ import {
   Loader,
 } from "./src/screens/index"
 import { useAuthDispatch, useAuthState } from "./src/context/auth"
+import { useAlertState } from "./src/context/alert"
 import { FAILED, AUTH } from "./src/context/types"
+import { Alert } from "./src/components"
 
 const Stack = createStackNavigator()
 
 const App = () => {
   const { loading, user, isAuthenticated } = useAuthState()
+  const { alert } = useAlertState()
   const dispatch = useAuthDispatch()
 
   useEffect(() => {
@@ -73,6 +76,7 @@ const App = () => {
           )}
         </>
       )}
+      {alert.message ? <Alert /> : null}
     </NavigationContainer>
   )
 }

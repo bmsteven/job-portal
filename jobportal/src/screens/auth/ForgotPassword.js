@@ -5,6 +5,7 @@ import { TextButton, FormInput } from "../../components"
 import checkMail, {checkEmailChange} from "../../utils/checkEmail"
 import AuthLayout from "./AuthLayout"
 import { forgotPassword } from "../../context/actions/auth"
+import { useAlertDispatch } from "../../context/alert"
 
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState("")
@@ -13,6 +14,7 @@ const ForgotPassword = ({ navigation }) => {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
   const [disabled, setDisabled] = useState(true)
+  const dispatch = useAlertDispatch()
 
   const handleChange = (e, field) => {
     setEmail(e)
@@ -28,7 +30,8 @@ const ForgotPassword = ({ navigation }) => {
       setLoading,
       email,
       setError,
-      navigation
+      navigation,
+      dispatch
     })
   }
 

@@ -6,6 +6,7 @@ import AuthLayout from "./AuthLayout"
 import checkSymbols, {checkChange} from "../../utils/checkSymbols"
 import checkMail, {checkEmailChange} from "../../utils/checkEmail"
 import { register } from "../../context/actions/auth"
+import { useAlertDispatch } from "../../context/alert"
 
 const SignUp = ({ navigation }) => {
   const [errors, setErrors] = useState(null)
@@ -22,6 +23,7 @@ const SignUp = ({ navigation }) => {
     password: "",
   })
   const { firstname, lastname, email, username, password } = formData
+  const dispatch = useAlertDispatch()
 
   const handleChange = (e, field) => {
     setFormData({
@@ -107,7 +109,8 @@ const SignUp = ({ navigation }) => {
       setError,
       setLoading,
       formData,
-      navigation
+      navigation, 
+      dispatch
     })
   }
 
