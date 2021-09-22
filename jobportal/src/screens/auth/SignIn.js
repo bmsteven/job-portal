@@ -35,12 +35,14 @@ const SignIn = ({ navigation }) => {
         setUsernameErr(null)
       }
     }
+
     if(field === "password") { 
-      if(e.trim().length === 0){
-        setPasswordErr("This field shouldn't be empty")}
+      if(e.trim().length === 0) {
+        setPasswordErr("This field shouldn't be empty")
       } else {
         setPasswordErr(null)
       }
+    }
   }
 
   const submit = () => {
