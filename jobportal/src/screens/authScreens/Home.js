@@ -23,17 +23,18 @@ const Home = ({navigation}) => {
             <ScrollView
                 style={{
                     flex: 1,
-                    padding: SIZES.padding
+                    paddingVertical: SIZES.padding
                 }}
             >
                 {/* headline */}
                 <View style={{
-                    marginVertical: SIZES.radius
+                    marginVertical: SIZES.radius,
+                    paddingHorizontal: SIZES.padding
                 }}>
                     <Text style={{
-                        ...FONTS.h2,
+                        ...FONTS.h1,
                     }}>
-                        Land to your destiny job today
+                        Land to your destiny job today.
                     </Text>
                 </View>
 
@@ -41,7 +42,7 @@ const Home = ({navigation}) => {
                 <Search />
 
                 {/* recommends */}
-                {/* <Recommends /> */}
+                <Recommends />
 
                 {/* categories */}
                 {/* <Categories /> */}

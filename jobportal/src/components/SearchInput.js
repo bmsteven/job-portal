@@ -9,10 +9,10 @@ const SearchInput = ({value, handleChange}) => {
         }}>
             <TextInput placeholder="Type to search..." placeholderTextColor={isFocused ? COLORS.gray : COLORS.gray2} style={{
                 backgroundColor: isFocused ? COLORS.white : COLORS.white2,
-                paddingHorizontal: SIZES.padding,
+                paddingHorizontal: SIZES.padding / 2,
                 paddingVertical: SIZES.padding / 3,
                 borderRadius: SIZES.radius,
-                ...FONTS.body3
+                ...FONTS.body4
             }} 
                 onFocus={() => setFocused(true)}
                 onBlur={() => setFocused(false)}

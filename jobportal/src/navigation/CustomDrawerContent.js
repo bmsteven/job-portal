@@ -93,11 +93,11 @@ const CustomDrawerContent = ({ navigation }) => {
                             ...FONTS.body3,
                             color: COLORS.white,
                             marginBottom: 2
-                        }}>{user?.firstname} {user?.lastname}</Text>
+                        }}  numberOfLines={1}>{user?.firstname} {user?.lastname}</Text>
                         <Text style={{
                             ...FONTS.body4,
                             color: COLORS.gray2
-                        }}>@{user?.username}</Text>
+                        }}  numberOfLines={1}>@{user?.username}</Text>
                     </View>
                 </TouchableOpacity>
             </View>}
