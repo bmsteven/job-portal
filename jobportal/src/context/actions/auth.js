@@ -48,6 +48,10 @@ export const forgotPassword = ({ email, setLoading, setError, navigation, dispat
     }
 }
 
+export const logout = () => {
+  
+}
+
 export const catchError = ({err, setLoading, dispatch}) => {
   setLoading(false)
   if (err?.response) {

@@ -1,16 +1,102 @@
-import React from 'react'
-import {View, Text, StyleSheet} from "react-native"
+import React, {useEffect} from 'react'
+import {View, Text, TouchableOpacity, StyleSheet} from "react-native"
 import {COLORS, SIZES, FONTS} from "../constants"
-import {useAlertState} from "../context/alert"
+import {useAlertState, useAlertDispatch} from "../context/alert"
+import {REMOVE} from "../context/types"
 
 const Alert = () => {
     const {alert} = useAlertState()
+    const dispatch = useAlertDispatch()
+
+    const close = () => {
+        dispatch({
+            type: REMOVE
+        })
+    }
+
+    let timeout = () => {
+        setTimeout(() => {
+        close()
+        }, 40000)
+    }
+
+    useEffect(() => {
+        timeout
+        return () => clearTimeout(timeout)
+    }, [])
+
+    let customAlertStyle, customTextStyle
+
+    if(alert?.type === "success") {
+        customAlertStyle = {
+            backgroundColor: COLORS.bg_success_alert,
+            borderColor: COLORS.border_success_alert,
+        }
+        customTextStyle = {
+            color: COLORS.color_success_alert
+        }
+    }
+    if(alert?.type === "danger") {
+        customAlertStyle = {
+            backgroundColor: COLORS.bg_danger_alert,
+            borderColor: COLORS.border_danger_alert,
+        }
+        customTextStyle = {
+            color: COLORS.color_danger_alert
+        }
+    }
+    if(alert?.type === "primary") {
+        customAlertStyle = {
+            backgroundColor: COLORS.bg_primary_alert,
+            borderColor: COLORS.border_primary_alert,
+        }
+        customTextStyle = {
+            color: COLORS.color_primary_alert
+        }
+    }
+    if(alert?.type === "secondary") {
+        customAlertStyle = {
+            backgroundColor: COLORS.bg_secondary_alert,
+            borderColor: COLORS.border_secondary_alert,
+        }
+        customTextStyle = {
+            color: COLORS.color_secondary_alert
+        }
+    }
+    if(alert?.type === "info") {
+        customAlertStyle = {
+            backgroundColor: COLORS.bg_info_alert,
+            borderColor: COLORS.border_info_alert,
+        }
+        customTextStyle = {
+            color: COLORS.color_info_alert
+        }
+    }
+    if(alert?.type === "warning") {
+        customAlertStyle = {
+            backgroundColor: COLORS.bg_warning_alert,
+            borderColor: COLORS.border_warning_alert,
+        }
+        customTextStyle = {
+            color: COLORS.color_warning_alert
+        }
+    }
+
     return (
         <View style={styles.container}>
-            <View style={styles.alertContainer}>
-                <Text>
-                    {alert.message && alert.message}
-                </Text>
+            <View style={[customAlertStyle, styles.alertContainer]}>
+                <View style={styles.messageContainer}>
+                    <Text style={[customTextStyle, styles.textStyle]}>
+                        {alert.message && alert.message}
+                    </Text>
+                </View>
+                <TouchableOpacity style={
+                    styles.close
+                    }
+                    onPress={close}
+                >
+                    {alert?.children ? <View></View> : <Text>Close</Text>}
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -19,7 +105,7 @@ const Alert = () => {
 const styles = StyleSheet.create({
     container: {
         position: "absolute",
-        bottom: SIZES.padding * 2,
+        bottom: SIZES.padding,
         zIndex: 10,
         display: "flex",
         flexDirection: "row",
@@ -27,9 +113,23 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     alertContainer: {
-        backgroundColor: "lightgray",
         paddingHorizontal: SIZES.padding,
-        paddingVertical:  SIZES.padding / 2
+        paddingVertical:  SIZES.padding / 2,
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    messageContainer: {
+        width: SIZES.width - 80
+    },
+    textStyle: {
+        ...FONTS.body4,  
+    },
+    close: {
+        width: 40,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     }
 })
 

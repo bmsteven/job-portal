@@ -67,8 +67,6 @@ const SignIn = ({ navigation }) => {
     }
   }, [formData, loading])
 
-  console.log(error)
-
   return (
     <AuthLayout title="Lets Sign You In" subtitle="Welcome back, please login to your account">
       <FormInput label="Username or email" handleChange={handleChange} autoComplete="email" value={username} name="username" error={usernameErr && usernameErr}/>
