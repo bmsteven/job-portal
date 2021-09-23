@@ -133,7 +133,7 @@ const HorizontalJob = ({job, index, length}) => {
                 paddingHorizontal: 2,
                 paddingVertical: 2,
                 borderRadius: SIZES.radius / 2,
-                width: 90,
+                width: 80,
                 justifyContent: "center", 
                 alignItems: "center"
             }}>
