@@ -6,6 +6,7 @@ import {checkFavourite, toggleFavourite} from "../../context/actions/jobs"
 import {useAuthState} from "../../context/auth"
 import {useAlertDispatch} from "../../context/alert"
 import {Date} from "../"
+import {capitalizeSentence} from "../../utils/capitalizeSentence"
 
 const HorizontalJob = ({job, index, length}) => {
     const {id, company, name, location, closeDate, jobType} = job
@@ -83,22 +84,22 @@ const HorizontalJob = ({job, index, length}) => {
 
                 {/* favourite */}
                 {!loading && <TouchableOpacity style={{
-                    backgroundColor: COLORS.transparentWhite2,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: SIZES.radius,
-                    height: 40,
-                    width: 40,
-                }}
-                onPress={() => {
-                    toggleFavourite({
-                        id, setFavourite, dispatch, favourite
-                    })
-                }}
+                        backgroundColor: COLORS.transparentWhite2,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: SIZES.radius,
+                        height: 40,
+                        width: 40,
+                    }}
+                    onPress={() => {
+                        toggleFavourite({
+                            id, setFavourite, dispatch, favourite
+                        })
+                    }}
                 >
                     <Image source={favourite ? icons.love : icons.favourite} style={{
-                        height: 30,
-                        width: 30,
+                        height: 25,
+                        width: 25,
                         tintColor: favourite ? COLORS.red : index === 1? COLORS.lightGray1 : index % 2 === 0 ? COLORS.darkGray : COLORS.gray, 
                     }} />
                 </TouchableOpacity>}
@@ -112,13 +113,27 @@ const HorizontalJob = ({job, index, length}) => {
                         ...FONTS.body3,
                             color: index === 1? COLORS.white2 : index % 2 === 0 ? COLORS.color_primary_alert : COLORS.color_success_alert,
                              marginBottom: 2
-                    }}>{company.name}</Text>}
+                    }}>{capitalizeSentence(company.name)}</Text>}
+                    <View style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                    }}>
+                    <View style={{
+                    marginRight: SIZES.padding / 4
+                }}>
+                <Image source={icons.location} style={{
+                    tintColor: COLORS.index === 1? COLORS.gray2 : index % 2 === 0 ? COLORS.gray : COLORS.gray,
+                    height: 16,
+                    width: 16
+                }} />
+                </View>
                     {location ? <Text numberOfLines={1} style={{
                             ...FONTS.body4,
                             color: index === 1? COLORS.gray2 : index % 2 === 0 ? COLORS.gray : COLORS.gray
-                        }}  >{location}</Text>: <Text>
-                        {company?.location}
+                        }}  >{capitalizeSentence(location)}</Text>: <Text>
+                        {capitalizeSentence(company.location)}
                     </Text>}
+                    </View>
                 </View>
 
             {/* render jobType */}
@@ -156,7 +171,7 @@ const HorizontalJob = ({job, index, length}) => {
                 <Text numberOfLines={2} style={{
                     ...FONTS.body2,
                     color: index === 1? COLORS.white2 : index % 2 === 0 ? COLORS.color_primary_alert : COLORS.color_success_alert
-                }}>{name}</Text>
+                }}>{capitalizeSentence(name)}</Text>
             </View>}
             </>
             </View>

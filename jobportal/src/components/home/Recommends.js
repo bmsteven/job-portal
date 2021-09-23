@@ -29,7 +29,7 @@ const Recommends = () => {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
-                paddingVertical: SIZES.padding ,
+                paddingVertical: SIZES.padding * 1.5,
                 paddingHorizontal: SIZES.padding
             }}>
                 <SecondaryHeader label="For you" />

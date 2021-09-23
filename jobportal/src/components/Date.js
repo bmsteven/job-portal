@@ -12,7 +12,7 @@ const DateTime = ({date, customStyle, textStyle}) => {
     let value = dayjs(now).to(date)
     let valueCheck = value.split(" ")
     value = valueCheck[1]  + " " + valueCheck[2] + " left"
-    if (valueCheck[2] === "days" && parseInt(valueCheck[1], 10) <= 2) {
+    if (valueCheck[2] === "days" && parseInt(valueCheck[1], 10) <= 6) {
         valueCheck = true
     } else {
         valueCheck = false

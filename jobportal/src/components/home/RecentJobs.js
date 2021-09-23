@@ -25,7 +25,7 @@ const RecentJobs = () => {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
-                paddingVertical: SIZES.padding ,
+                paddingVertical: SIZES.padding * 1.5,
                 paddingHorizontal: SIZES.padding
             }}>
                 <SecondaryHeader label="Recent Jobs" />
@@ -45,7 +45,7 @@ const RecentJobs = () => {
                     data={jobs}
                     keyExtractor={item => `${item.id}`}
                     renderItem={({item, index}) => (
-                        <VerticalJob job={item} lastItem={index === jobs?.length - 1} />
+                        <VerticalJob job={item} />
                     )}
                 />
              </View>

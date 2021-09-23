@@ -32,6 +32,7 @@ export const COLORS = {
   transparentWhite2: "rgba(255, 255, 255, 0.2)",
   transparentWhite3: "rgba(255, 255, 255, 0.3)",
   transparentWhite4: "rgba(255, 255, 255, 0.4)",
+  transparentWhite5: "rgba(255, 255, 255, 0.5)",
   transparentWhite7: "rgba(255, 255, 255, 0.7)",
 
   primary: "#00507A",
