@@ -34,13 +34,13 @@ const Home = ({navigation}) => {
             <Recommends />
 
             {/* categories */}
-            {/* <Categories /> */}
+            <Categories />
 
             {/* recent jobs */}
             <RecentJobs />
 
             {/* companies */}
-            {/* <FeaturedCompanies /> */}
+            <FeaturedCompanies />
         </>
     )
 

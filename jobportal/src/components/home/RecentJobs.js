@@ -19,7 +19,6 @@ const RecentJobs = () => {
         <>{!loading && 
         <View style={{
             marginVertical: SIZES.padding,
-            paddingBottom: SIZES.padding * 5
         }}>
             <View style={{
                 flexDirection: "row",

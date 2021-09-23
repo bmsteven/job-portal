@@ -2,8 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import axios from "axios"
 import { API } from "../../utils/api"
 import {catchError} from "./auth"
+import {CATEGORIES, CATEGORIES_FAIL} from "../types"
 
-export const fetchJobs = ({ setItems, setLoading }) => {
+export const fetchJobs = async ({ setItems, setLoading }) => {
   setLoading(true)
   axios
     .get(
@@ -18,7 +19,7 @@ export const fetchJobs = ({ setItems, setLoading }) => {
     })
 }
 
-export const fetchRecommendedJobs = ({setItems, setLoading, params}) => {
+export const fetchRecommendedJobs = async ({setItems, setLoading, params}) => {
   let keyword = params?.keyword
   let location = params?.location
   keyword = keyword?.split(" ")
@@ -98,4 +99,25 @@ export const toggleFavourite = async ({id, setFavourite, dispatch, favourite}) =
           catchError({err, dispatch})
         })
     }
+}
+
+export const fetchCategories = async ({dispatch, setLoading}) => {
+  setLoading(true)
+      axios
+        .get(
+          `${API}/jobCategories?fields=id,name,children[id, name]&filter=verified:eq:true`
+        )
+        .then((res) => {
+          dispatch({
+            type: CATEGORIES,
+            payload: res?.data?.jobCategories,
+          })
+          setLoading(false)
+        })
+        .catch((err) => {
+          setLoading(false)
+          dispatch({
+            type: CATEGORIES_FAIL
+          })
+        })
 }

@@ -151,20 +151,6 @@ const authReducer = (state, action) => {
             },
           ],
         },
-        {
-          id: 13,
-          name: "Open To",
-          children: [
-            {
-              id: 16,
-              name: "Individual",
-            },
-            {
-              id: 17,
-              name: "Company",
-            },
-          ],
-        },
         ...data,
       ]
       return {
@@ -187,20 +173,6 @@ const authReducer = (state, action) => {
               {
                 id: 15,
                 name: "Full Time",
-              },
-            ],
-          },
-          {
-            id: 13,
-            name: "Open To",
-            children: [
-              {
-                id: 16,
-                name: "Individual",
-              },
-              {
-                id: 17,
-                name: "Company",
               },
             ],
           },
