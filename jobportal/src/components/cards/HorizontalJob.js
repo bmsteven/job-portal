@@ -1,15 +1,35 @@
-import React from 'react'
-import {Text, View, Image, TouchableHighlight} from "react-native"
+import React, { useState, useEffect } from 'react'
+import {Text, View, Image, TouchableHighlight, TouchableOpacity} from "react-native"
 import {SIZES, COLORS, FONTS, icons} from "../../constants"
 import {BACKEND} from "../../utils/api"
+import {checkFavourite, toggleFavourite} from "../../context/actions/jobs"
+import {useAuthState} from "../../context/auth"
+import {useAlertDispatch} from "../../context/alert"
+import {Date} from "../"
 
 const HorizontalJob = ({job, index, length}) => {
     const {id, company, name, location, closeDate, jobType} = job
     let logo = BACKEND + "/api" + company?.logo?.split("api")[1]
     let lastItem = index === length
-    const onPress = () => {
-        console.log("hello world!!!.me");
-    }
+    const {user} = useAuthState()
+    const dispatch = useAlertDispatch()
+    const [loading, setLoading] = useState(true)
+    const [favourite, setFavourite] = useState(false)
+
+    useEffect(() => {
+        let isMounted = true
+        if (isMounted)
+            checkFavourite({
+                setLoading,
+                setFavourite,
+                id,
+                userId: user.id
+            })
+        return () => {
+            isMounted = false
+        }
+    }, [])
+
     return (
         <View style={{
                 alignSelf: "flex-end",
@@ -19,7 +39,7 @@ const HorizontalJob = ({job, index, length}) => {
         <TouchableHighlight 
             activeOpacity={0.8}
             underlayColor="transparent"
-            onPress={onPress}
+            onPress={() => {}}
             >
         <View style={{
                 backgroundColor: index === 1? COLORS.primary : index % 2 === 0 ? COLORS.border_primary_alert : COLORS.border_success_alert,
@@ -32,7 +52,11 @@ const HorizontalJob = ({job, index, length}) => {
         >
         <>
             {/* render company info */}
-            <View >
+            <View style={{
+                flexDirection: "row",
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+            }}>
                 <View style={{
                     height: 70,
                     width: 70,
@@ -56,7 +80,32 @@ const HorizontalJob = ({job, index, length}) => {
                         }}
                     />
                 </View>
-                <View style={{
+
+                {/* favourite */}
+                {!loading && <TouchableOpacity style={{
+                    backgroundColor: COLORS.transparentWhite2,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: SIZES.radius,
+                    height: 40,
+                    width: 40,
+                }}
+                onPress={() => {
+                    toggleFavourite({
+                        id, setFavourite, dispatch, favourite
+                    })
+                }}
+                >
+                    <Image source={favourite ? icons.love : icons.favourite} style={{
+                        height: 30,
+                        width: 30,
+                        tintColor: favourite ? COLORS.red : index === 1? COLORS.lightGray1 : index % 2 === 0 ? COLORS.darkGray : COLORS.gray, 
+                    }} />
+                </TouchableOpacity>}
+            </View>
+
+            {/* company */}
+            <View style={{
                     marginTop: SIZES.padding
                 }}>
                     {company?.name && <Text numberOfLines={1} style={{
@@ -71,25 +120,34 @@ const HorizontalJob = ({job, index, length}) => {
                         {company?.location}
                     </Text>}
                 </View>
-            </View>
 
             {/* render jobType */}
-            {jobType && <View style={{
+            <View style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
                 marginTop: SIZES.padding / 1.6,
+            }}>
+            {jobType && <View style={{
                 backgroundColor: COLORS.transparentWhite2,
-                    paddingHorizontal: 2,
-                    paddingVertical: 2,
-                    borderRadius: SIZES.radius / 2,
-                    width: 90,
-                    justifyContent: "center", 
-                    alignItems: "center"
+                paddingHorizontal: 2,
+                paddingVertical: 2,
+                borderRadius: SIZES.radius / 2,
+                width: 90,
+                justifyContent: "center", 
+                alignItems: "center"
             }}>
                 <Text style={{
                     ...FONTS.body4,
-                    color: index === 1? COLORS.lightGray1 : index % 2 === 0 ? COLORS.darkGray : COLORS.border_success_alert, 
-
+                    color: index === 1? COLORS.lightGray1 : index % 2 === 0 ? COLORS.darkGray : COLORS.border_success_alert,
                 }}>{jobType}</Text>
             </View>}
+            <Date date={closeDate} textStyle={{
+                    ...FONTS.body4,
+                    color: index === 1 ? COLORS.white2 : index % 2 === 0 ? COLORS.color_primary_alert : COLORS.color_success_alert
+                }}
+            />
+            </View>
 
             {/* render job title */}
             {name && <View style={{

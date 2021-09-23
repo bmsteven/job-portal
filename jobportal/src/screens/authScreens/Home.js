@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, SafeAreaView, FlatList } from "react-native"
+import { View, SafeAreaView, FlatList } from "react-native"
 import {
  PrimaryHeader
 } from "../../components"
@@ -20,7 +20,12 @@ const Home = ({navigation}) => {
     const ListFooterComponent = (
         <>
             {/* headline */}
-            <PrimaryHeader label="Land to your destiny job today" />
+            <View style={{
+                    paddingVertical: SIZES.padding,
+                }}
+            >
+                <PrimaryHeader label="Land to your destiny job today" />
+            </View>
 
             {/* search component */}
             <Search />
@@ -43,7 +48,6 @@ const Home = ({navigation}) => {
             <SafeAreaView
                 style={{
                     flex: 1,
-                    paddingVertical: SIZES.padding,
                 }}
             >
                 <FlatList

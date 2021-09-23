@@ -24,7 +24,8 @@ export const login = ({setLoading, setError, formData, navigation, dispatch, ale
         navigation.navigate("CustomDrawer")
       })
       .catch((err) => {
-        catchError({err, setLoading, dispatch: alertDispatch})
+        setLoading(false)
+        catchError({err, dispatch: alertDispatch})
       })
 }
 
@@ -44,7 +45,8 @@ export const register = ({setLoading, navigation, formData, dispatch}) => {
         navigation.navigate("SignIn")
       })
       .catch((err) => {
-        catchError({err, setLoading, dispatch})
+        setLoading(false)
+        catchError({err, dispatch})
       })
 }
 
@@ -61,8 +63,7 @@ export const logout = ({dispatch, navigation}) => {
   navigation.navigate("SignIn")
 }
 
-export const catchError = ({err, setLoading, dispatch}) => {
-  setLoading(false)
+export const catchError = ({err, dispatch}) => {
   if (err?.response) {
     dispatch({
       type: ADD,

@@ -8,7 +8,6 @@ import {useAuthState} from "../../context/auth"
 const RecentJobs = () => {
     const [jobs, setJobs] = useState([])
     const [loading, setLoading] = useState(false)
-    const {user, isAuthenticated} = useAuthState()
     useEffect(() => {
         fetchJobs({
             setItems: setJobs,
@@ -17,7 +16,7 @@ const RecentJobs = () => {
     }, [])
 
     return (
-        <>{isAuthenticated && !loading && 
+        <>{!loading && 
         <View style={{
             marginVertical: SIZES.padding,
             paddingBottom: SIZES.padding * 5

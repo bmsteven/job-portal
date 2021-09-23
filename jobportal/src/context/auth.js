@@ -236,8 +236,8 @@ const authReducer = (state, action) => {
 
     // Get user data
     case AUTH:
-        dp = payload.dp.split("api")
-        dp = BACKEND + "/api" + dp[1]
+      dp = payload.dp.split("api")
+      dp = BACKEND + "/api" + dp[1]
       userCopy = {...payload, dp}
       return {
         ...state,

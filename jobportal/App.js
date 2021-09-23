@@ -44,6 +44,7 @@ const App = () => {
         })
       }
     })
+    
     AsyncStorage.getItem("dp", (err, value) => {
       if (value) {
         dispatch({
