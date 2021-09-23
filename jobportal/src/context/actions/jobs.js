@@ -12,7 +12,6 @@ export const fetchJobs = ({ setItems, setLoading }) => {
       setLoading(false)
     })
     .catch((err) => {
-      console.log(err)
       setLoading(false)
     })
 }

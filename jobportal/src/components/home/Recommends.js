@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text, TouchableOpacity, FlatList} from "react-native"
-import { HorizontalJob } from "../"
+import {View, Text, TouchableOpacity, FlatList, SafeAreaView } from "react-native"
+import { HorizontalJob, SecondaryHeader } from "../"
 import { COLORS, FONTS, SIZES } from "../../constants"
 import {fetchRecommendedJobs} from "../../context/actions/jobs"
 import {useAuthState} from "../../context/auth"
@@ -32,10 +32,7 @@ const Recommends = () => {
                 paddingVertical: SIZES.padding ,
                 paddingHorizontal: SIZES.padding
             }}>
-                <Text style={{
-                    ...FONTS.h3,
-                    width: SIZES.width - 120
-                }}>Recommended for you</Text>
+                <SecondaryHeader label="For you" />
                 <TouchableOpacity>
                     <Text style={{
                         ...FONTS.body4,
@@ -47,19 +44,17 @@ const Recommends = () => {
             </View>
             
             {/* render jobs */}
-            <View style={{
-                // marginRight: SIZES.padding
-            }}>
+            <SafeAreaView>
                 <FlatList
                     data={jobs}
                     keyExtractor={item => `${item.id}`}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     renderItem={({item, index}) => (
-                        <HorizontalJob job={item} lastItem={index === jobs?.length - 1} />
+                        <HorizontalJob job={item} index={index + 1} length={jobs?.length} />
                     )}
                 />
-             </View>
+             </SafeAreaView>
         </View>
 }</>
     )

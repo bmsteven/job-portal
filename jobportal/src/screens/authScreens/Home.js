@@ -1,7 +1,7 @@
 import React from 'react'
-import { View, Text, ScrollView } from "react-native"
+import { View, Text, SafeAreaView, FlatList } from "react-native"
 import {
-    Header
+ PrimaryHeader
 } from "../../components"
 import {
     Search,
@@ -13,48 +13,45 @@ import {
 import {COLORS, SIZES, FONTS} from "../../constants"
 
 const Home = ({navigation}) => {
+    const emptyData = [];
+
+    const renderNullItem = () => null;
+
+    const ListFooterComponent = (
+        <>
+            {/* headline */}
+            <PrimaryHeader label="Land to your destiny job today" />
+
+            {/* search component */}
+            <Search />
+
+            {/* recommends */}
+            <Recommends />
+
+            {/* categories */}
+            {/* <Categories /> */}
+
+            {/* recent jobs */}
+            <RecentJobs />
+
+            {/* companies */}
+            {/* <FeaturedCompanies /> */}
+        </>
+    )
+
     return (
-        <View style={{
-            flex: 1,
-            backgroundColor: COLORS.bg,
-            borderRadius: 32
-        }}>
-            <Header navigation={navigation}/>
-            <ScrollView
+            <SafeAreaView
                 style={{
                     flex: 1,
-                    paddingVertical: SIZES.padding
+                    paddingVertical: SIZES.padding,
                 }}
             >
-                {/* headline */}
-                <View style={{
-                    marginVertical: SIZES.radius,
-                    paddingHorizontal: SIZES.padding
-                }}>
-                    <Text style={{
-                        ...FONTS.h1,
-                    }}>
-                        Land to your destiny job today.
-                    </Text>
-                </View>
-
-                {/* search component */}
-                <Search />
-
-                {/* recommends */}
-                <Recommends />
-
-                {/* categories */}
-                {/* <Categories /> */}
-
-                {/* recent jobs */}
-                {/* <RecentJobs /> */}
-
-                {/* companies */}
-                {/* <FeaturedCompanies /> */}
-
-            </ScrollView>
-        </View>
+                <FlatList
+                    data={emptyData}
+                    renderItem={renderNullItem}
+                    ListFooterComponent={ListFooterComponent}
+                />
+            </SafeAreaView>
     )
 }
 

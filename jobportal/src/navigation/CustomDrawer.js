@@ -33,7 +33,7 @@ const CustomDrawer = () => {
                 overlayColor="transparent"
                 drawerStyle={{
                     flex: 1,
-                    width: "70%",
+                    width: "80%",
                     backgroundColor: "transparent"
                 }}
                 sceneContainerStyle={{

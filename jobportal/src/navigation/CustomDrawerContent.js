@@ -121,7 +121,7 @@ const CustomDrawerContent = ({ navigation }) => {
                     }}/>
                 </View>
                 <View style={{
-                    backgroundColor: COLORS.gray,
+                    backgroundColor: COLORS.transparentWhite2,
                     height: 1,
                     width: SIZES.width * 0.25,
                 }}/>

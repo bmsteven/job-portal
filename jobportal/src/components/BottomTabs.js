@@ -211,7 +211,7 @@ const BottomTabs = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         position: "absolute",
-        bottom: SIZES.padding,
+        bottom: SIZES.padding / 2,
         zIndex: 10,
         display: "flex",
         flexDirection: "row",

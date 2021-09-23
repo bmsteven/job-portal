@@ -13,17 +13,17 @@ const MainLayout = ({navigation, drawerAnimationStyle}) => {
   return (
     <Animated.View 
     style={{
-      backgroundColor: COLORS.bg,
+      // backgroundColor: COLORS.bg,
       flex: 1,
-      ...drawerAnimationStyle,
+      // ...drawerAnimationStyle,
     }}
     >
       {/* pretty much everything else */}
       <Stack.Navigator screenOptions={{
           headerShown: false,
           cardStyle: {
-            backgroundColor: 'white',
-            borderRadius: 32
+            // backgroundColor: 'white',
+            // borderRadius: 32
           },
           ...TransitionScreenOptions
         }}

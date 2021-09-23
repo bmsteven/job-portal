@@ -1,11 +1,57 @@
-import React from 'react'
-import {View, Text} from "react-native"
+import React, {useState, useEffect} from 'react'
+import {View, Text, TouchableOpacity, FlatList} from "react-native"
+import { VerticalJob, SecondaryHeader } from "../"
+import { COLORS, FONTS, SIZES } from "../../constants"
+import {fetchJobs} from "../../context/actions/jobs"
+import {useAuthState} from "../../context/auth"
 
 const RecentJobs = () => {
+    const [jobs, setJobs] = useState([])
+    const [loading, setLoading] = useState(false)
+    const {user, isAuthenticated} = useAuthState()
+    useEffect(() => {
+        fetchJobs({
+            setItems: setJobs,
+            setLoading,
+        })
+    }, [])
+
     return (
-        <View>
-            <Text>Hello, Recent Jobs</Text>
+        <>{isAuthenticated && !loading && 
+        <View style={{
+            marginVertical: SIZES.padding,
+            paddingBottom: SIZES.padding * 5
+        }}>
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                paddingVertical: SIZES.padding ,
+                paddingHorizontal: SIZES.padding
+            }}>
+                <SecondaryHeader label="Recent Jobs" />
+                <TouchableOpacity>
+                    <Text style={{
+                        ...FONTS.body4,
+                        color: COLORS.primary,
+                    }}>
+                        View All
+                    </Text>
+                </TouchableOpacity>
+            </View>
+            
+            {/* render jobs */}
+            <View>
+                <FlatList
+                    data={jobs}
+                    keyExtractor={item => `${item.id}`}
+                    renderItem={({item, index}) => (
+                        <VerticalJob job={item} lastItem={index === jobs?.length - 1} />
+                    )}
+                />
+             </View>
         </View>
+}</>
     )
 }
 

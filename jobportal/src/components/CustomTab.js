@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, TouchableWithoutFeedback, StyleSheet, Image} from "react-native"
+import {View, Text, TouchableOpacity, StyleSheet, Image} from "react-native"
 import Animated, {useSharedValue} from "react-native-reanimated"
 import {COLORS, SIZES, FONTS, icons} from "../constants"
 import {useUIDispatch} from "../context/UI"
@@ -17,7 +17,7 @@ const CustomTab = ({label, icon, isSelected, outerStyle, textStyle, outerContain
             ]}
                 
         >
-            <TouchableWithoutFeedback 
+            <TouchableOpacity 
                 onPress={() => {
                     dispatch({
                         type: SELECTED,
@@ -72,7 +72,7 @@ const CustomTab = ({label, icon, isSelected, outerStyle, textStyle, outerContain
                         {label}
                     </Animated.Text>
         </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
     </Animated.View>
     )
 }
