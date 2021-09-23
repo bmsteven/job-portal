@@ -144,7 +144,8 @@ const VerticalJob = ({job}) => {
                     }}>{capitalizeSentence(company.name)}</Text>}
                     <View style={{
                         flexDirection: "row",
-                        alignItems: "center"
+                        alignItems: "center",
+                        marginTop: SIZES.padding / 5
                     }}>
                      {/* render jobType */}
             {jobType && 

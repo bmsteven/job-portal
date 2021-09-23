@@ -4,14 +4,18 @@ import { VerticalJob, SecondaryHeader } from "../"
 import { COLORS, FONTS, SIZES } from "../../constants"
 import {fetchJobs} from "../../context/actions/jobs"
 import {useAuthState} from "../../context/auth"
+import {useAlertDispatch} from "../../context/alert"
 
 const RecentJobs = () => {
     const [jobs, setJobs] = useState([])
     const [loading, setLoading] = useState(false)
+    const dispatch = useAlertDispatch()
+    
     useEffect(() => {
         fetchJobs({
             setItems: setJobs,
             setLoading,
+            dispatch
         })
     }, [])
 

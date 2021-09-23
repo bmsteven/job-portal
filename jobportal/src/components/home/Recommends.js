@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text, TouchableOpacity, FlatList, SafeAreaView } from "react-native"
+import {View, Text, TouchableOpacity, FlatList } from "react-native"
 import { HorizontalJob, SecondaryHeader } from "../"
 import { COLORS, FONTS, SIZES } from "../../constants"
 import {fetchRecommendedJobs} from "../../context/actions/jobs"
@@ -44,17 +44,15 @@ const Recommends = () => {
             </View>
             
             {/* render jobs */}
-            <SafeAreaView>
-                <FlatList
-                    data={jobs}
-                    keyExtractor={item => `${item.id}`}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({item, index}) => (
-                        <HorizontalJob job={item} index={index + 1} length={jobs?.length} />
-                    )}
-                />
-             </SafeAreaView>
+            <FlatList
+                data={jobs}
+                keyExtractor={item => `${item.id}`}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({item, index}) => (
+                    <HorizontalJob job={item} index={index + 1} length={jobs?.length} />
+                )}
+            />
         </View>
 }</>
     )

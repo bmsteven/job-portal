@@ -4,7 +4,7 @@ import { API } from "../../utils/api"
 import {catchError} from "./auth"
 import {CATEGORIES, CATEGORIES_FAIL} from "../types"
 
-export const fetchJobs = async ({ setItems, setLoading }) => {
+export const fetchJobs = async ({ setItems, setLoading, dispatch }) => {
   setLoading(true)
   axios
     .get(
@@ -16,6 +16,7 @@ export const fetchJobs = async ({ setItems, setLoading }) => {
     })
     .catch((err) => {
       setLoading(false)
+      catchError({err, dispatch})
     })
 }
 
