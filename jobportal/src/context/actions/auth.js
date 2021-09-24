@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import { API } from "../../utils/api"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import { AUTH, FAILED, LOGIN, REGISTER, ADD, LOGOUT } from "../types"
 
 export const login = ({setLoading, setError, formData, navigation, dispatch, alertDispatch}) => {
@@ -56,17 +57,26 @@ export const forgotPassword = ({ email, setLoading, setError, navigation, dispat
     }
 }
 
-export const logout = ({dispatch, navigation}) => {
-  dispatch({
-    type: LOGOUT
-  })
-  navigation.navigate(
-      'OnBoarding', 
-      {}, 
-      NavigationActions.navigate({ 
-          routeName: 'SignIn' 
-      })
-  )
+export const logout = async ({dispatch, navigation}) => {
+      let user = await AsyncStorage.getItem("user")
+      let token = JSON.parse(user)?.token
+
+      let config = {
+          headers: {
+            Authorization: `Bearer ` + token,
+          },
+        }
+
+      axios(`${API}/logout`, config)
+        .then((res) => {
+          dispatch({
+            type: LOGOUT,
+          })
+          navigation.navigate("SignIn")
+        })
+        .catch((err) => {
+          catchError({err, dispatch})
+        })
 }
 
 export const catchError = ({err, dispatch}) => {

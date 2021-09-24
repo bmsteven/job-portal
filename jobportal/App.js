@@ -31,8 +31,8 @@ const App = () => {
     getUserDetails()
   }, [])
 
-  const getUserDetails = () => {
-    AsyncStorage.getItem("user", (err, value) => {
+  const getUserDetails = async () => {
+    await AsyncStorage.getItem("user", (err, value) => {
       if (value) {
         dispatch({
           type: AUTH,
@@ -45,18 +45,18 @@ const App = () => {
       }
     })
     
-    AsyncStorage.getItem("dp", (err, value) => {
-      if (value) {
-        dispatch({
-          type: LOAD_DP,
-          payload: value,
-        })
-      } else {
-        dispatch({
-          type: FAILED,
-        })
-      }
-    })
+    // await AsyncStorage.getItem("dp", (err, value) => {
+    //   if (value) {
+    //     dispatch({
+    //       type: LOAD_DP,
+    //       payload: value,
+    //     })
+    //   } else {
+    //     dispatch({
+    //       type: FAILED,
+    //     })
+    //   }
+    // })
   }
 
   return (
@@ -64,40 +64,24 @@ const App = () => {
       {loading ? (
         <Loader />
       ) : (
-        <>
-          {isAuthenticated && user && !loading ? (
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-                ...TransitionScreenOptions
-              }}
-              initialRouteName={"CustomDrawer"}
-            >
-              <Stack.Screen name="CustomDrawer" children={CustomDrawer} />
-            </Stack.Navigator>
-          ) : (
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-                ...TransitionScreenOptions
-              }}
-              initialRouteName={"OnBoarding"}
-            >
-              <Stack.Screen name="OnBoarding" component={OnBoarding} />
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+              ...TransitionScreenOptions
+            }}
+            initialRouteName={isAuthenticated && user ? "CustomDrawer" : "OnBoarding"}
+          >
+            <Stack.Screen name="CustomDrawer" children={CustomDrawer} />
 
-              <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="OnBoarding" component={OnBoarding} />
 
-              <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="SignIn" component={SignIn} />
 
-              <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <Stack.Screen name="SignUp" component={SignUp} />
 
-              <Stack.Screen name="CustomDrawer" children={(props) => { 
-                  return <CustomDrawer {...props} Stack={Stack}/>
-                }} 
-              />
-            </Stack.Navigator>
-          )}
-        </>
+            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+
+          </Stack.Navigator>
       )}
       {alert.message ? <Alert /> : null}
     </NavigationContainer>

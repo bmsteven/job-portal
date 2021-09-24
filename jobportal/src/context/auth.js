@@ -83,6 +83,8 @@ const authReducer = (state, action) => {
         ...state,
         user: null,
         isAuthenticated: false,
+        companies: [],
+        roles: [],
       }
 
     case COMPANIES:

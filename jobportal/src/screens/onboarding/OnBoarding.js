@@ -98,7 +98,7 @@ const OnBoarding = ({ navigation }) => {
           />
           <TextButton 
             label="Skip" 
-            onPress={() => navigation.navigate("CustomDrawer")}
+            onPress={() => navigation.navigate('CustomDrawer', {screen: "Home"} )}
             containerStyle={{
               backgroundColor: null
             }}
