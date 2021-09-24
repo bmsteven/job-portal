@@ -5,6 +5,7 @@ import {fetchCategories} from "../../context/actions/jobs"
 import {SecondaryHeader} from "../"
 import { COLORS, FONTS, SIZES } from "../../constants"
 import {Category, SubCategory} from "./categories"
+import {CategoryLoader} from "../loaders"
 
 const Categories = () => {
     const [loading, setLoading] = useState(false)
@@ -37,6 +38,9 @@ const Categories = () => {
     }, [selected])
 
     return (
+        <>{loading ? <>
+            <CategoryLoader />
+        </> : <>
         <View style={{
             marginVertical: SIZES.padding,
         }}>
@@ -71,6 +75,9 @@ const Categories = () => {
             }
 
         </View>
+        </>
+}
+</>
     )
 }
 

@@ -60,7 +60,13 @@ export const logout = ({dispatch, navigation}) => {
   dispatch({
     type: LOGOUT
   })
-  navigation.navigate("SignIn")
+  navigation.navigate(
+      'OnBoarding', 
+      {}, 
+      NavigationActions.navigate({ 
+          routeName: 'SignIn' 
+      })
+  )
 }
 
 export const catchError = ({err, dispatch}) => {

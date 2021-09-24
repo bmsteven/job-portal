@@ -73,8 +73,6 @@ const App = () => {
               }}
               initialRouteName={"CustomDrawer"}
             >
-              <Stack.Screen name="SignIn" component={SignIn} />
-
               <Stack.Screen name="CustomDrawer" children={CustomDrawer} />
             </Stack.Navigator>
           ) : (
