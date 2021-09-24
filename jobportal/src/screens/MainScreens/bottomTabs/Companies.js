@@ -2,8 +2,8 @@ import React from 'react'
 import { View, Text } from "react-native"
 import {
     
-} from "../../components"
-import {COLORS, SIZES, FONTS} from "../../constants"
+} from "../../../components"
+import {COLORS, SIZES, FONTS} from "../../../constants"
 
 const Companies = ({navigation}) => {
     return (

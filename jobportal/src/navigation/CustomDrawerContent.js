@@ -2,6 +2,7 @@ import React from 'react'
 import {View, Text, Image, TouchableOpacity} from "react-native"
 import {DrawerContentScrollView} from "@react-navigation/drawer"
 import {COLORS, FONTS, SIZES, icons} from "../constants"
+import {useAlertDispatch} from "../context/alert"
 import {useAuthState, useAuthDispatch} from "../context/auth"
 import {logout} from "../context/actions/auth"
 
@@ -32,10 +33,11 @@ const CustomDrawerItem = ({icon, label, isSelected, onPress}) => {
 const CustomDrawerContent = ({ navigation }) => {
     const { user, isAuthenticated } = useAuthState()
     const dispatch = useAuthDispatch()
+    const alertDispatch = useAlertDispatch()
     const clicked = () => {
         logout({
             dispatch,
-            navigation
+            navigation,
         })
     }
 

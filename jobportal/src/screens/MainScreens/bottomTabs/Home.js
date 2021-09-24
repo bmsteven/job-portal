@@ -2,15 +2,15 @@ import React from 'react'
 import { View, SafeAreaView, FlatList } from "react-native"
 import {
  PrimaryHeader
-} from "../../components"
+} from "../../../components"
 import {
     Search,
     Recommends,
     Categories,
     RecentJobs,
     FeaturedCompanies
-} from "../../components/home"
-import {COLORS, SIZES, FONTS} from "../../constants"
+} from "../../../components/home"
+import {COLORS, SIZES, FONTS} from "../../../constants"
 
 const Home = ({navigation}) => {
     const emptyData = [];

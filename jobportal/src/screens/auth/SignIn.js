@@ -4,7 +4,7 @@ import { SIZES, FONTS, COLORS } from "../../constants"
 import { TextButton, FormInput } from "../../components"
 import AuthLayout from "./AuthLayout"
 import { login } from "../../context/actions/auth"
-import { useAuthDispatch } from "../../context/auth"
+import { useAuthDispatch, useAuthState } from "../../context/auth"
 import { useAlertDispatch } from "../../context/alert"
 
 const SignIn = ({ navigation }) => {
@@ -13,6 +13,7 @@ const SignIn = ({ navigation }) => {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
   const [disabled, setDisabled] = useState(true)
+  const {isAuthenticated} = useAuthState()
   const dispatch = useAuthDispatch()
   const alertDispatch = useAlertDispatch()
   const [formData, setFormData] = useState({
@@ -62,7 +63,8 @@ const SignIn = ({ navigation }) => {
       formData,
       navigation,
       dispatch,
-      alertDispatch
+      alertDispatch,
+      isAuthenticated
     })
   }
 

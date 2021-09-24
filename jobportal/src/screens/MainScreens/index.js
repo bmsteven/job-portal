@@ -1,6 +1,6 @@
-import Home from "./Home"
-import Jobs from "./Jobs"
-import Companies from "./Companies"
+import Home from "./bottomTabs/Home"
+import Jobs from "./bottomTabs/Jobs"
+import Companies from "./bottomTabs/Companies"
 import BottomTabsScreen from "./BottomTabsScreen"
 
 export {

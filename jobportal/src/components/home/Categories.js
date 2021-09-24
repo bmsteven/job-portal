@@ -16,22 +16,27 @@ const Categories = () => {
     const [selectedCategory, setSelectedCategory] = useState(null)
 
     useEffect(() => {
-        if (categories?.length <= 2) {
-            fetchCategories({dispatch, setLoading})
+        let isMounted = true
+        if(isMounted)
+            if (categories?.length <= 1 || categories === undefined ) {
+                fetchCategories({dispatch, setLoading})
+            }
+        return () => {
+            isMounted = false
         }
-    }, [])
-
-    useEffect(() => {
-        setFilteredCategories(categories.filter(el => el.children.length > 0))
     }, [categories])
 
     useEffect(() => {
-        setSelectedCategory(filteredCategories.find((el, index) => index === selected))
+        setFilteredCategories(categories?.filter(el => el.children.length > 0))
+    }, [categories])
+
+    useEffect(() => {
+        setSelectedCategory(filteredCategories?.find((el, index) => index === selected))
     }, [filteredCategories])
 
     useEffect(() => {
         let isMounted = true
-        if(isMounted) setSelectedCategory(filteredCategories.find((el, index) => index === selected))
+        if(isMounted) setSelectedCategory(filteredCategories?.find((el, index) => index === selected))
         return () => {
             isMounted = false
         }
@@ -52,15 +57,17 @@ const Categories = () => {
             </View>
 
             {/* render categories */}
-            <FlatList
-                data={filteredCategories}
-                keyExtractor={item => `${item.id}`}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                renderItem={({item, index}) => (
-                    <Category category={item} index={index} setSelected={setSelected} selected={selected === index} lastItem={index === filteredCategories.length - 1} />
-                )}
-            />
+            {filteredCategories?.length > 0 &&
+                <FlatList
+                    data={filteredCategories}
+                    keyExtractor={item => `${item.id}`}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={({item, index}) => (
+                        <Category category={item} index={index} setSelected={setSelected} selected={selected === index} lastItem={index === filteredCategories.length - 1} />
+                    )}
+                />
+            }
 
             {/* render children */}
             {
