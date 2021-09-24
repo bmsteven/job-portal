@@ -69,8 +69,6 @@ const FormInput = ({
   const inputRef = createRef(null);
   const [animation, _] = useState(new Value(focusedLabel ? 1 : 0));
   const clock = new Clock();
-//   const debouncedOnFocusTextInput = debounce(_onFocusLabel, 500, { 'leading': true, 'trailing': false });
-
       useCode(
     () => set(
       animation,
@@ -85,20 +83,6 @@ const FormInput = ({
     ),
     [focusedLabel]
   )
-
-  
-
-//   useEffect(
-//     () => {
-//       if (!focusedLabel && value) {
-//         debouncedOnFocusTextInput(true)
-//       }
-//       if (focusedLabel && !value) {
-//         debouncedOnFocusTextInput(false)
-//       }
-//     },
-//     [value]
-//   )
 
     const focusStyle = {
     top: interpolateNode(animation, {
@@ -189,10 +173,12 @@ const styles = StyleSheet.create({
   },
   togglePasswordStyle: {
     position: 'absolute',
-    right: 15,
+    right: 0,
     zIndex: 1,
-    paddingHorizontal: 5,
-    top: 18
+    paddingHorizontal: 15,
+    top: 6.5,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   errorText: {
     fontSize: 13,

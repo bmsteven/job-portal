@@ -111,23 +111,26 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         width: "100%",
+        paddingHorizontal: 10
     },
     alertContainer: {
-        paddingHorizontal: SIZES.padding,
-        paddingVertical:  SIZES.padding / 2,
         display: "flex",
         flexDirection: "row",
+        justifyContent: "space-between",
         alignItems: "center",
+        width: "100%"
     },
     messageContainer: {
-        width: SIZES.width - 80
+        paddingVertical:  SIZES.padding / 2,
+        paddingHorizontal: SIZES.padding,
     },
     textStyle: {
         ...FONTS.body4,  
     },
     close: {
-        width: 40,
-        display: "flex",
+        width: 60,
+        height: "100%",
+        backgroundColor: COLORS.transparentWhite4,
         justifyContent: "center",
         alignItems: "center"
     }
