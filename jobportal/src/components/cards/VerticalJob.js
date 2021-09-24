@@ -148,17 +148,17 @@ const VerticalJob = ({job, screen}) => {
                         marginTop: SIZES.padding / 5
                     }}>
                      {/* render jobType */}
-            {jobType && 
-                <Text style={{
-                    ...FONTS.body3,
-                    color: COLORS.gray, 
+                    {jobType && 
+                        <Text style={{
+                            ...FONTS.body3,
+                            color: COLORS.gray, 
 
-                }}>{jobType} - </Text>}
-                <Date date={closeDate} textStyle={{
-                    ...FONTS.body4,
-                    color: COLORS.gray, 
-                }}
-            />
+                    }}>{jobType} - </Text>}
+                    <Date date={closeDate} textStyle={{
+                        ...FONTS.body4,
+                        color: COLORS.gray, 
+                    }}
+                    />
                     </View>
                 </View>
             </View>

@@ -4,6 +4,7 @@ import {SecondaryHeader} from "../"
 import {HorizontalCompany} from "../"
 import { COLORS, FONTS, SIZES } from "../../constants"
 import {fetchFeaturedCompanies} from "../../context/actions/company"
+import {CompanyLoader} from "../loaders"
 
 const FeaturedCompanies = () => {
     const [companies, setCompanies] = useState([])
@@ -16,10 +17,15 @@ const FeaturedCompanies = () => {
     }, [])
 
     return (
+        <>{loading ? <>
+            <CompanyLoader />
+        </> : 
+
          <View style={{
             marginVertical: SIZES.padding,
             marginBottom: SIZES.padding * 6,
         }}>
+        {companies?.length > 0 && <>
             <View style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -48,7 +54,10 @@ const FeaturedCompanies = () => {
                     <HorizontalCompany company={item} index={index + 1} length={companies?.length} />
                 )}
             />
-        </View>
+            </>
+}
+        </View>}
+        </>
     )
 }
 

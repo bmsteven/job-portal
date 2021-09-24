@@ -21,21 +21,21 @@ const Recommend = () => {
                     width: SIZES.width - 150
                 }}>
                     <AnimatedView delay={300} customStyle={{
-                        backgroundColor: COLORS.transparentBlack2,
+                        backgroundColor: COLORS.gray2,
                     }}/>
                 </View>
                 <View style={{
                     width: 50
                 }}>
                     <AnimatedView delay={100} duration={1000} customStyle={{
-                        backgroundColor: COLORS.transparentBlack2,
+                        backgroundColor: COLORS.transparentBlack1,
                     }}/>
                 </View>
             </View>
 
             <FlatList
                 data={arr}
-                keyExtractor={item => `${item.id}`}
+                keyExtractor={item => `${item}`}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 renderItem={({item, index}) => (

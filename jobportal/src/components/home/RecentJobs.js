@@ -4,6 +4,7 @@ import { VerticalJob, SecondaryHeader } from "../"
 import { COLORS, FONTS, SIZES } from "../../constants"
 import {fetchJobs} from "../../context/actions/jobs"
 import {useAlertDispatch} from "../../context/alert"
+import {JobLoader} from "../loaders"
 
 const RecentJobs = () => {
     const [jobs, setJobs] = useState([])
@@ -19,7 +20,10 @@ const RecentJobs = () => {
     }, [])
 
     return (
-        <>{!loading && 
+        <>{loading ? <>
+            <JobLoader />
+        </> : 
+        <>{jobs?.length > 0 && 
             <View style={{
                 marginVertical: SIZES.padding,
             }}>
@@ -52,6 +56,7 @@ const RecentJobs = () => {
                 />
              </View>
         </View>
+}</>
 }</>
     )
 }

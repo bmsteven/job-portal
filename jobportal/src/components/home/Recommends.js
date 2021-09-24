@@ -26,9 +26,10 @@ const Recommends = () => {
 
     return (
         <>{isAuthenticated && <> 
-        {!loading ? <>
+        {loading ? <>
             <Recommend />
         </> : <>
+        {jobs?.length > 0 && 
              <View style={{
             marginVertical: SIZES.padding
         }}>
@@ -61,6 +62,7 @@ const Recommends = () => {
                 )}
             />
         </View>
+}
         </>}
        
         </>
