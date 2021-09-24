@@ -7,7 +7,7 @@ import { COLORS, FONTS, SIZES } from "../../constants"
 import {Category, SubCategory} from "./categories"
 import {CategoryLoader} from "../loaders"
 
-const Categories = () => {
+const Categories = ({search, setSearch}) => {
     const [loading, setLoading] = useState(false)
     const [selected, setSelected] = useState(0)
     const {categories} = useAuthState()
@@ -46,14 +46,12 @@ const Categories = () => {
         <>{loading ? <>
             <CategoryLoader />
         </> : <>
-        <View style={{
-            marginVertical: SIZES.padding,
-        }}>
+        <View>
             <View style={{
-                paddingVertical: SIZES.padding * 1.5,
+                paddingVertical: SIZES.padding / 2,
                 paddingHorizontal: SIZES.padding 
             }}>
-                <SecondaryHeader label="What are you looking for?" showLine={true} />
+                <SecondaryHeader label="Categories" showLine={false}/>
             </View>
 
             {/* render categories */}
@@ -72,12 +70,12 @@ const Categories = () => {
             {/* render children */}
             {
                 selectedCategory?.children?.length > 0 && <View style={{
-                    marginTop: SIZES.padding,
+                    marginTop: SIZES.padding / 2,
                     paddingHorizontal: SIZES.padding,
                     flexDirection: "row",
                     flexWrap: "wrap"
                 }}>
-                    {selectedCategory.children.map((subcategory) => <SubCategory key={subcategory.id} subcategory={subcategory} category={selectedCategory} />)}
+                    {selectedCategory.children.map((subcategory) => <SubCategory key={subcategory.id} subcategory={subcategory} category={selectedCategory} search={search} setSearch={setSearch} />)}
                 </View>
             }
 

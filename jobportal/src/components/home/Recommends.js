@@ -40,7 +40,7 @@ const Recommends = () => {
                 paddingVertical: SIZES.padding * 1.5,
                 paddingHorizontal: SIZES.padding
             }}>
-                <SecondaryHeader label="For you" />
+                <SecondaryHeader showLine={true} label="For you" />
                 <TouchableOpacity>
                     <Text style={{
                         ...FONTS.body4,

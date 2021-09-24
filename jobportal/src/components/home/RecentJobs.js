@@ -34,7 +34,7 @@ const RecentJobs = () => {
                 paddingVertical: SIZES.padding * 1.5,
                 paddingHorizontal: SIZES.padding
             }}>
-                <SecondaryHeader label="Recent Jobs" />
+                <SecondaryHeader showLine={true} label="Recent Jobs" />
                 <TouchableOpacity>
                     <Text style={{
                         ...FONTS.body4,

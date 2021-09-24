@@ -2,13 +2,16 @@ import React, {useState} from 'react'
 import {View, Text, TextInput, Image, TouchableOpacity} from "react-native"
 import {icons, COLORS, SIZES, FONTS} from "../constants"
 
-const SearchBar = () => {
+const SearchBar = ({customStyle}) => {
     return (
-        <TouchableOpacity style={{
+        <View style={{
+            ...customStyle,
+            // backgroundColor: "red"
         }}>
             <View style={{
                     backgroundColor: COLORS.white2,
                     paddingHorizontal: SIZES.padding / 1.5,
+                    paddingLeft: SIZES.padding * 2,
                     paddingVertical: SIZES.padding / 1.5,
                     borderRadius: SIZES.radius,
                 }} 
@@ -16,11 +19,11 @@ const SearchBar = () => {
                 <Text style={{
                     ...FONTS.body4,
                     color: COLORS.gray2
-                }}>Type to search...</Text>
+                }}>type to search...</Text>
             </View>
             <View style={{
                 position: "absolute",
-                right: 0,
+                left: 0,
                 top: 0,
                 height: "100%",
                 justifyContent: "center",
@@ -32,7 +35,7 @@ const SearchBar = () => {
                     width: 25
                 }} />
             </View>
-        </TouchableOpacity>
+        </View>
     )
 }
 

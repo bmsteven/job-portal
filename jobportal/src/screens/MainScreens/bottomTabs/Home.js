@@ -10,7 +10,7 @@ import {
     RecentJobs,
     FeaturedCompanies
 } from "../../../components/home"
-import {COLORS, SIZES, FONTS} from "../../../constants"
+import {SIZES} from "../../../constants"
 
 const Home = ({navigation}) => {
     const emptyData = [];
@@ -24,23 +24,23 @@ const Home = ({navigation}) => {
                     paddingVertical: SIZES.padding,
                 }}
             >
-                <PrimaryHeader label="Land to your destiny job today" />
+                <PrimaryHeader label="· Land to your destiny job today" />
             </View>
 
             {/* search component */}
-            <Search />
+            <Search navigation={navigation}/>
 
             {/* recommends */}
             <Recommends />
 
             {/* categories */}
-            <Categories />
+            <Categories navigation={navigation}/>
 
             {/* recent jobs */}
-            <RecentJobs />
+            <RecentJobs navigation={navigation}/>
 
             {/* companies */}
-            <FeaturedCompanies />
+            <FeaturedCompanies navigation={navigation}/>
         </>
     )
 

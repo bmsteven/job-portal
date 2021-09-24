@@ -18,6 +18,9 @@ const help = require("../assets/icons/help.png")
 const about = require("../assets/icons/about.png")
 const login = require("../assets/icons/login.png")
 const register = require("../assets/icons/register.png")
+const bin = require("../assets/icons/delete.png")
+const check = require("../assets/icons/check.png")
+const uncheck = require("../assets/icons/uncheck.png")
 
 export default {
     cross,
@@ -38,5 +41,8 @@ export default {
     help,
     about,
     login,
-    register
+    register,
+    bin,
+    check,
+    uncheck
 }

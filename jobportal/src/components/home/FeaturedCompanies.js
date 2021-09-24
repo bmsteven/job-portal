@@ -33,7 +33,7 @@ const FeaturedCompanies = () => {
                 paddingHorizontal: SIZES.padding,
                 paddingBottom: SIZES.padding * 1.5, 
             }}>
-                <SecondaryHeader label="Featured Companies" />
+                <SecondaryHeader showLine={true} label="Featured Companies" />
                 <TouchableOpacity>
                     <Text style={{
                         ...FONTS.body4,

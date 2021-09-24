@@ -1,15 +1,17 @@
 import React from 'react'
-import {View} from "react-native"
+import {View, TouchableOpacity} from "react-native"
 import {SearchBar} from "../"
 import {SIZES} from "../../constants"
 
-const Search = () => {
+const Search = ({navigation}) => {
     return (
         <View style={{
             marginVertical: 8,
             paddingHorizontal: SIZES.padding
         }}>
-            <SearchBar />
+        <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+            <SearchBar navigation={navigation}/>
+            </TouchableOpacity>
         </View>
     )
 }
