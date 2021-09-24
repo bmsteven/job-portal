@@ -22,11 +22,11 @@ const Recommends = () => {
                 }
             })
         return () => {isMounted = false}
-    }, [])
+    }, [user])
 
     return (
         <>{isAuthenticated && <> 
-        {loading ? <>
+        {!loading ? <>
             <Recommend />
         </> : <>
              <View style={{

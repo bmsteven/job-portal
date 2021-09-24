@@ -1,46 +1,40 @@
-import React, {useEffect} from 'react'
-import {View} from "react-native"
-import Animated, { set, useCode, Easing, withRepeat, withDelay, interpolateNode } from 'react-native-reanimated';
+import React, { useEffect } from "react"
+import { View } from "react-native"
+import Animated, {
+  withRepeat,
+  withDelay,
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  useAnimatedProps,
+} from "react-native-reanimated"
+import {SIZES} from "../../constants"
 
-const AnimatedView = ({customStyle, delay=0}) => {
-     const animation = new Animated.Value(0);
-    //   useCode(
-    //     () =>
-    //     set(
-    //         animation,
-    //         withDelay(
-    //             delay,
-    //             withRepeat({
-    //                 duration: 1000,
-    //                 easing: Easing.inOut(Easing.ease),
+const AnimatedView = ({ customStyle, delay = 0, duration = 2000 }) => {
+  const progress = useSharedValue(0)
 
-    //                 boomerang: true,
-    //                 autoStart: true,
-    //             })
-    //         )
-    //     ),
-    //     [animation]
-    // );
+  useEffect(() => {
+    progress.value = withDelay(delay, withRepeat(withTiming(1, { duration }), -1, true))
+  }, [])
 
-    // const width = 40
+  const animatedStyle = useAnimatedStyle(() => ({
+    width: `${progress.value * 100}%`,
+  }))
 
-    // const width = Animated.interpolateNode(animation,  {
-    //     inputRange: [0, 1],
-    //     outputRange: [0, "100%"]
-    // })
-
-    // console.log(
-    //     width
-    // );
-
-    return (
-        <Animated.View style={[
-            customStyle, {
-            height: 20,
-            width: 0,
-            backgroundColor: "white"
-        }]}/>
-    )
+  return (
+    <Animated.View
+      style={[
+        {
+          height: 20,
+          width: 0,
+          backgroundColor: "white",
+          borderRadius: SIZES.radius
+        },
+        animatedStyle,
+        customStyle,
+      ]}
+    />
+  )
 }
 
 export default AnimatedView
