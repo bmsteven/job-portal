@@ -4,25 +4,32 @@ import { HorizontalJob, SecondaryHeader } from "../"
 import { COLORS, FONTS, SIZES } from "../../constants"
 import {fetchRecommendedJobs} from "../../context/actions/jobs"
 import {useAuthState} from "../../context/auth"
+import {Recommend} from "../loaders"
 
 const Recommends = () => {
     const [jobs, setJobs] = useState([])
     const [loading, setLoading] = useState(false)
     const {user, isAuthenticated} = useAuthState()
     useEffect(() => {
-        fetchRecommendedJobs({
-            setItems: setJobs,
-            setLoading,
-            params: {
-                keyword: user?.title,
-                location: user?.location
-            }
-        })
+        let isMounted = true
+        if(isAuthenticated && isMounted)
+            fetchRecommendedJobs({
+                setItems: setJobs,
+                setLoading,
+                params: {
+                    keyword: user?.title,
+                    location: user?.location
+                }
+            })
+        return () => {isMounted = false}
     }, [])
 
     return (
-        <>{isAuthenticated && !loading && 
-        <View style={{
+        <>{isAuthenticated && <> 
+        {loading ? <>
+            <Recommend />
+        </> : <>
+             <View style={{
             marginVertical: SIZES.padding
         }}>
             <View style={{
@@ -54,6 +61,9 @@ const Recommends = () => {
                 )}
             />
         </View>
+        </>}
+       
+        </>
 }</>
     )
 }

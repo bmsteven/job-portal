@@ -10,9 +10,9 @@ const Categories = () => {
     const [loading, setLoading] = useState(false)
     const [selected, setSelected] = useState(0)
     const {categories} = useAuthState()
-    const [selectedCategory, setSelectedCategory] = useState(null)
     const dispatch = useAuthDispatch()
-    const filteredCategories = categories.filter(el => el.children.length > 0)
+    const [filteredCategories, setFilteredCategories] = useState([])
+    const [selectedCategory, setSelectedCategory] = useState(null)
 
     useEffect(() => {
         if (categories?.length <= 2) {
@@ -21,8 +21,19 @@ const Categories = () => {
     }, [])
 
     useEffect(() => {
+        setFilteredCategories(categories.filter(el => el.children.length > 0))
+    }, [categories])
+
+    useEffect(() => {
+        setSelectedCategory(filteredCategories.find((el, index) => index === selected))
+    }, [filteredCategories])
+
+    useEffect(() => {
         let isMounted = true
         if(isMounted) setSelectedCategory(filteredCategories.find((el, index) => index === selected))
+        return () => {
+            isMounted = false
+        }
     }, [selected])
 
     return (

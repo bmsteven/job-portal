@@ -8,7 +8,7 @@ import {useAlertDispatch} from "../../context/alert"
 import {Date} from "../"
 import {capitalizeSentence} from "../../utils/capitalizeSentence"
 
-const VerticalJob = ({job}) => {
+const VerticalJob = ({job, screen}) => {
     const {id, company, name, location, closeDate, jobType} = job
     let logo = BACKEND + "/api" + company?.logo?.split("api")[1]
     const {user} = useAuthState()
@@ -18,7 +18,7 @@ const VerticalJob = ({job}) => {
 
      useEffect(() => {
         let isMounted = true
-        if (isMounted)
+        if (isMounted && screen === "jobs")
             checkFavourite({
                 setLoading,
                 setFavourite,
@@ -61,7 +61,7 @@ const VerticalJob = ({job}) => {
                                 ...FONTS.body2
                             }}>{capitalizeSentence(name)}</Text>
                         </View>}
-                        {!loading && <TouchableOpacity style={{
+                        {!loading && screen === "jobs" && <TouchableOpacity style={{
                                 backgroundColor: COLORS.white,
                                 justifyContent: "center",
                                 alignItems: "center",

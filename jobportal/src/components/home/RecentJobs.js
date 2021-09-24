@@ -3,7 +3,6 @@ import {View, Text, TouchableOpacity, FlatList} from "react-native"
 import { VerticalJob, SecondaryHeader } from "../"
 import { COLORS, FONTS, SIZES } from "../../constants"
 import {fetchJobs} from "../../context/actions/jobs"
-import {useAuthState} from "../../context/auth"
 import {useAlertDispatch} from "../../context/alert"
 
 const RecentJobs = () => {
@@ -21,9 +20,9 @@ const RecentJobs = () => {
 
     return (
         <>{!loading && 
-        <View style={{
-            marginVertical: SIZES.padding,
-        }}>
+            <View style={{
+                marginVertical: SIZES.padding,
+            }}>
             <View style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
