@@ -21,6 +21,7 @@ const SearchInput = ({value, handleChange, focused}) => {
                 onBlur={() => setFocused(false)}
                 value={value}
                 onChange={e => handleChange(e)}
+                autoFocus={isFocused}
             />
             <TouchableOpacity style={{
                 position: "absolute",
