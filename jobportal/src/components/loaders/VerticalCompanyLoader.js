@@ -3,19 +3,19 @@ import { View, FlatList } from "react-native"
 import {SIZES, COLORS} from "../../constants"
 import AnimatedView from "./AnimatedView"
 
-const CompanyLoader = () => {
+const VerticalCompanyLoader = () => {
 
     let arr = [1,2,3]
     return (
         <View style={{
             marginBottom: SIZES.padding * 6,
+            paddingHorizontal: SIZES.padding
         }}>
             <View style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
                 paddingVertical: SIZES.padding * 1.5,
-                paddingHorizontal: SIZES.padding
             }}>
                 <View style={{
                     width: SIZES.width - 150
@@ -46,22 +46,19 @@ const CompanyLoader = () => {
     )
 }
 
-export default CompanyLoader
+export default VerticalCompanyLoader
 
-const CardLoader = ({index, length}) => {
-    let lastItem = index === length
+const CardLoader = () => {
     return (
         <View style={{
-                marginRight: lastItem ? SIZES.padding : 0,
+            marginVertical: SIZES.radius
         }}>
             <View style={{
-                        backgroundColor: COLORS.white,
-                        padding: SIZES.padding,
-                        minWidth: 200,
-                        maxWidth: 300,
-                        borderRadius: SIZES.radius,
-                        marginLeft: SIZES.padding,
-                    }}
+                    backgroundColor: COLORS.white,
+                    padding: SIZES.padding,
+                    width: "100%",
+                    borderRadius: SIZES.radius,
+                }}
             >
                 <View style={{
                     flexDirection: "row",

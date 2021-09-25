@@ -48,6 +48,20 @@ export const fetchRecommendedJobs = async ({setItems, setLoading, params}) => {
   }
 }
 
+// export const fetchJobs = async ({setItems, setLoading, url}) => {
+//    axios
+//     .get(
+//       `${API}/jobs?pageSize=6&fields=name,company,closeDate,location,jobType,id`
+//     )
+//     .then((res) => {
+//       setItems(res.data.jobs)
+//       setLoading(false)
+//     })
+//     .catch((err) => {
+//       setLoading(false)
+//     })
+// }
+
 export const checkFavourite = async ({id, userId, setFavourite, setLoading}) => {
     setLoading(true)
     let user = await AsyncStorage.getItem("user")

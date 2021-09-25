@@ -44,7 +44,7 @@ const Card = ({label, handleChange, value}) => {
         paddingVertical: SIZES.padding / 2,
         paddingHorizontal: SIZES.padding 
     }}>
-        <SecondaryHeader label={label} showLine={false}/>
+        {/* <SecondaryHeader label={label} showLine={false}/> */}
         <View>
             <FormInput label={label} handleChange={handleChange} value={value} name={label} />
         </View>

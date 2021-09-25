@@ -1,20 +1,49 @@
 import React from 'react'
-import { View, Text } from "react-native"
+import { View, SafeAreaView, FlatList } from "react-native"
 import {
-    
+ PrimaryHeader
 } from "../../../components"
-import {COLORS, SIZES, FONTS} from "../../../constants"
+import {
+    Search,
+} from "../../../components/home"
+import {SIZES, FONTS} from "../../../constants"
+import {CompanyList} from "../../../components/companies"
 
 const Companies = ({navigation}) => {
+
+    const emptyData = [];
+
+    const renderNullItem = () => null;
+
+    const ListFooterComponent = (
+        <>
+            {/* headline */}
+            <View style={{
+                    paddingVertical: SIZES.padding,
+                }}
+            >
+                {/* search component */}
+                <Search navigation={navigation}/>
+
+                {/* companies list */}
+                <CompanyList navigation={navigation} />
+
+            </View>
+        </>
+    )
+
     return (
-        <View style={{
-            flex: 1,
-            // backgroundColor: COLORS.bg,
-            // borderRadius: 32
-        }}>
-            {/* <Header navigation={navigation}/> */}
-            <Text>Companies</Text>
-        </View>
+        <SafeAreaView
+            style={{
+                flex: 1,
+            }}
+        >
+            <FlatList
+                data={emptyData}
+                renderItem={renderNullItem}
+                ListFooterComponent={ListFooterComponent}
+            />
+        </SafeAreaView>
     )
 }
 

@@ -6,8 +6,6 @@ const SubCategory = ({subcategory, category, search, setSearch}) => {
     const [checked, setChecked] = useState(false)
     const {id, name} = subcategory
 
-    console.log(search);
-
     let searchCopy = search?.categories
     // checking if category exists in search state
     let categoryIndex = searchCopy?.findIndex((u) => u.id == category.id)
