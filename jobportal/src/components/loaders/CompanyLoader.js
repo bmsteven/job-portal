@@ -35,10 +35,11 @@ const CompanyLoader = () => {
 
             <FlatList
                 data={arr}
+                horizontal
                 keyExtractor={item => `${item}`}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({item, index}) => (
-                    <CardLoader />
+                    <CardLoader index={index + 1} length={arr.length}/>
                 )}
             />
 
