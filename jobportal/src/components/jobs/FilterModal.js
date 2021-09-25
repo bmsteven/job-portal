@@ -10,10 +10,9 @@ const FilterModal = ({isVisible, closeFilter, search, setSearch, url, setUrl}) =
 
     // set search url by applying filters
     const applyFilters = () => {
+        // fetch searched results with url created
         closeFilter()
     }
-
-    console.log(url);
 
     return (
         <Modal
@@ -59,7 +58,7 @@ const FilterModal = ({isVisible, closeFilter, search, setSearch, url, setUrl}) =
 
                         <PrimaryHeader label="Filter your search" customStyle={{
                             ...FONTS.h2
-                        }} />
+                        }}/>
 
                         {/* name and location inputs */}
                         <FilterInputs search={search} setSearch={setSearch} url={url} setUrl={setUrl} />
@@ -68,7 +67,7 @@ const FilterModal = ({isVisible, closeFilter, search, setSearch, url, setUrl}) =
                         <Categories search={search} setSearch={setSearch} url={url} setUrl={setUrl} />
 
                         {/* criteria */}
-                        <FilterCriteria search={search} setSearch={setSearch}/>
+                        <FilterCriteria search={search} setSearch={setSearch} url={url} setUrl={setUrl}/>
                     </ScrollView>
 
                     {/* button */}

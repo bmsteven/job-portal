@@ -3,9 +3,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native"
 import {icons, images, COLORS, SIZES, FONTS} from "../constants"
 import {useAuthState} from "../context/auth"
 
-const Header = ({
-    back, navigation
-}) => {
+const Header = ({ navigation}) => {
     const {user, isAuthenticated} = useAuthState()
     return (
         <View style={{
@@ -30,53 +28,21 @@ const Header = ({
 
         }}>
             {/* menu */}
-            {back ? <TouchableOpacity onPress={() => navigation.goBack()}  style={{
-                    width: 45,
-                    height: 45,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: COLORS.white2,
-                    borderRadius: SIZES.radius,
-                    shadowColor: "rgba(0,0,0,0.3)",
-                    shadowOffset: {
-                    width: 3,
-                    height: 2,
-                    },
-                    shadowOpacity: 0.01,
-                    shadowRadius: 5,
-                    elevation: 5,
-                }}>
-                <Image source={icons.back} style={{
-                    width: 35,
-                    height: 35,
-                    resizeMode: "contain",
-                    tintColor: COLORS.gray
-                }}/>
-            </TouchableOpacity> : <TouchableOpacity onPress={() => navigation.openDrawer()}
+            <TouchableOpacity onPress={() => navigation.openDrawer()}
                 style={{
                     width: 45,
                     height: 45,
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: COLORS.white2,
-                    borderRadius: SIZES.radius,
-                    shadowColor: "rgba(0,0,0,0.3)",
-                    shadowOffset: {
-                    width: 3,
-                    height: 2,
-                    },
-                    shadowOpacity: 0.01,
-                    shadowRadius: 5,
-                    elevation: 5,
                 }}
             >
                 <Image source={icons.menu} style={{
                     width: 35,
                     height: 35,
                     resizeMode: "contain",
-                    tintColor: COLORS.gray
+                    tintColor: COLORS.black
                 }} />
-            </TouchableOpacity>}
+            </TouchableOpacity>
 
             {/* logo */}
             <View>

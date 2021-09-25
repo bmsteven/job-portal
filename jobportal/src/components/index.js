@@ -4,6 +4,7 @@ import SearchInput from "./SearchInput"
 import SearchBar from "./SearchBar"
 import Alert from "./Alert"
 import Header from "./Header"
+import BackHeader from "./BackHeader"
 import BottomTabs from "./BottomTabs"
 import CustomTab from "./CustomTab"
 import VerticalJob from "./cards/VerticalJob"
@@ -14,4 +15,4 @@ import SecondaryHeader from "./SecondaryHeader"
 import PrimaryHeader from "./PrimaryHeader"
 import Date from "./Date"
 
-export { TextButton, FormInput, SearchInput, SearchBar, SecondaryHeader, PrimaryHeader, Alert, Header, BottomTabs, CustomTab, VerticalJob, HorizontalJob, VerticalCompany, HorizontalCompany, Date }
+export { TextButton, FormInput, SearchInput, SearchBar, SecondaryHeader, PrimaryHeader, Alert, Header, BackHeader, BottomTabs, CustomTab, VerticalJob, HorizontalJob, VerticalCompany, HorizontalCompany, Date }

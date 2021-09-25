@@ -97,7 +97,6 @@ const Location = ({search, setSearch, url, setUrl}) => {
 
 const Card = ({label, handleChange, value}) => {
     return <View style={{
-        paddingVertical: SIZES.padding / 2,
         paddingHorizontal: SIZES.padding 
     }}>
         {/* <SecondaryHeader label={label} showLine={false}/> */}

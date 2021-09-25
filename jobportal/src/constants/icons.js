@@ -27,6 +27,7 @@ export default {
     companies,
     jobs,
     edit,
+    back,
     profile_black,
     menu,
     search,

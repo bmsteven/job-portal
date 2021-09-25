@@ -2,14 +2,15 @@ import React, {useState} from 'react'
 import {View, Text} from "react-native"
 import {SearchInput} from "../../components/search" 
 
-const Search = () => {
+const Search = ({navigation}) => {
     const [keyword, setKeyword] = useState("")
     const handleChange = e => {
         setKeyword(e)
     }
-    console.log(keyword);
     return (
-        <View>
+        <View style={{
+            flex: 1,
+        }}>
             <SearchInput focused={true} value={keyword} handleChange={handleChange} />
         </View>
     )
