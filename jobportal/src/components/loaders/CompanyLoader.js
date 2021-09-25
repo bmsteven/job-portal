@@ -56,13 +56,13 @@ const CardLoader = ({index, length}) => {
                 marginRight: lastItem ? SIZES.padding : 0,
         }}>
             <View style={{
-                        backgroundColor: COLORS.white,
-                        padding: SIZES.padding,
-                        minWidth: 200,
-                        maxWidth: 300,
-                        borderRadius: SIZES.radius,
-                        marginLeft: SIZES.padding,
-                    }}
+                    backgroundColor: COLORS.white,
+                    padding: SIZES.padding,
+                    minWidth: 200,
+                    maxWidth: 300,
+                    borderRadius: SIZES.radius,
+                    marginLeft: SIZES.padding,
+                }}
             >
                 <View style={{
                     flexDirection: "row",
