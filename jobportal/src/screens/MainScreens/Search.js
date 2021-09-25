@@ -11,7 +11,7 @@ const Search = ({navigation}) => {
         <View style={{
             flex: 1,
         }}>
-            <SearchInput focused={true} value={keyword} handleChange={handleChange} />
+            <SearchInput focused={true} value={keyword} handleChange={handleChange} navigation={navigation} />
         </View>
     )
 }

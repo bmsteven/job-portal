@@ -3,10 +3,10 @@ import {View, Text, TextInput, Image, TouchableOpacity} from "react-native"
 import {icons, COLORS, SIZES, FONTS} from "../../constants"
 import {BackHeader} from "../"
 
-const SearchInput = ({value, handleChange, focused}) => {
+const SearchInput = ({navigation, value, handleChange, focused}) => {
     const [isFocused, setFocused] = useState(focused)
     return (
-        <BackHeader isFocused={isFocused}>
+        <BackHeader isFocused={isFocused} navigation={navigation} >
             <TextInput 
                 placeholder="Type to search..." 
                 placeholderTextColor={COLORS.gray} 
