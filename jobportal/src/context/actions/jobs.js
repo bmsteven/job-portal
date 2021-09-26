@@ -244,6 +244,29 @@ export const revoke = async ({id, dispatch, setLoading, setApplication, closeMod
     })
 }
 
+export const accept  = async ({id, setLoading, setApplication, dispatch, closeModal}) => {
+  let user = await AsyncStorage.getItem("user")
+  let token = JSON.parse(user)?.token
+
+  let config = {
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  }
+  // setLoading(true)
+  setApplication({
+    status: "You Accepted this offer"
+  })
+  dispatch({
+    type: ADD,
+    payload: {
+      message: "You accepted the job",
+      type: "success"
+    }
+  })
+  closeModal()
+}
+
 export const fetchCategories = async ({dispatch, setLoading}) => {
   setLoading(true)
   axios

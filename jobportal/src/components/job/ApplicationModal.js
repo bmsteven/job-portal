@@ -4,7 +4,7 @@ import {COLORS, SIZES, FONTS, icons} from "../../constants"
 import {FilterInputs, Categories, FilterCriteria} from "./"
 import {PrimaryHeader, TextButton, SecondaryHeader} from "../"
 import {capitalizeSentence} from "../../utils/capitalizeSentence"
-import {revoke} from "../../context/actions/jobs"
+import {revoke, accept} from "../../context/actions/jobs"
 import dayjs from "dayjs"
 import {useAuthState} from "../../context/auth"
 import {useAlertDispatch} from "../../context/alert"
@@ -16,8 +16,6 @@ const ApplicationModal = ({isVisible, closeModal, application, setApplication, j
     const dispatch = useAlertDispatch()
 
     const [loading, setLoading] = useState(false)
-
-    console.log(application);
 
     return <Modal
             animationType="fade"
@@ -188,17 +186,16 @@ const ApplicationModal = ({isVisible, closeModal, application, setApplication, j
                                 />
                             </View>}
                             {application?.accepted && <View>
-                                <TextButton label="Accept and Close"  containerStyle={{
+                                <TextButton label={loading ? "Please wait" : "Accept and Close"}  containerStyle={{
                                         height: 45,
                                         marginVertical: SIZES.padding / 2,
                                         borderRadius: SIZES.radius / 2,
-                                        paddingHorizontal: SIZES.radius
+                                        paddingHorizontal: SIZES.radius,
+                                        backgroundColor: loading ? COLORS.transparentPrimray : COLORS.secondary,
                                     }}
                                     onPress={() => {
                                         // accept offer functionality
-
-                                        // close
-                                        closeModal()
+                                        accept({id: job?.id, setApplication, setLoading, dispatch, closeModal})
                                     }}
                                 />
                             </View>}
