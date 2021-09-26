@@ -8,7 +8,7 @@ import {Category, SubCategory} from "./categories"
 import {CategoryLoader} from "../loaders"
 
 const Categories = ({navigation}) => {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [selected, setSelected] = useState(0)
     const {categories} = useAuthState()
     const dispatch = useAuthDispatch()

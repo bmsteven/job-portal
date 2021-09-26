@@ -74,7 +74,7 @@ const Job = ({navigation, route}) => {
             <Footer id={route.params?.id} openModal={openApplicationModal} application={application} setApplication={setApplication} />
             
             {/* application modal */}
-            {isVisible && <ApplicationModal closeModal={closeModal} isVisible={isVisible} application={application} job={job}/>}
+            {isVisible && <ApplicationModal closeModal={closeModal} isVisible={isVisible} application={application} setApplication={setApplication} job={job} logo={logo}/>}
         </View>
     )
 }

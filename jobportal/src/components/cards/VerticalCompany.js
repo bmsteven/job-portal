@@ -82,27 +82,27 @@ const VerticalCompany = ({ company, navigation}) => {
                             </View>
                             }
 
-                        {/* render location */}
-                        <View style={{
-                            flexDirection: "row",
-                            alignItems: "center",
-                            marginTop: SIZES.padding / 5
-                        }}>
-                        <View style={{
-                                marginRight: SIZES.padding / 4
+                            {/* render location */}
+                            <View style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                marginTop: SIZES.padding / 5
                             }}>
-                            <Image source={icons.location} style={{
-                                tintColor: COLORS.gray,
-                                height: 16,
-                                width: 16
-                            }} />
-                        </View>
-                        {location && <Text style={{
-                                ...FONTS.body4,
-                                color: COLORS.gray, 
-                            }}>{location}
-                        </Text>}
-                        </View>
+                                <View style={{
+                                    marginRight: SIZES.padding / 4
+                                }}>
+                                    <Image source={icons.location} style={{
+                                        tintColor: COLORS.gray,
+                                        height: 16,
+                                        width: 16
+                                    }} />
+                                </View>
+                                {location && <Text style={{
+                                        ...FONTS.body4,
+                                        color: COLORS.gray, 
+                                    }}>{location}
+                                </Text>}
+                            </View>
                         </View>
                    </View>
                 </View>

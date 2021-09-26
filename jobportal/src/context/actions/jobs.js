@@ -154,24 +154,27 @@ export const checkApplicationStatus = async ({setLoading, setApplication, dispat
     .then((res) => {
       if(res?.data?.interview === true) {
         setApplication({
-          status: "Accepted",
+          status: "You were accepted!",
           date: res?.data?.date,
-          location: res?.data?.location
+          location: res?.data?.location, 
+          accepted: true
         })
       } else if (res?.data?.interview === false) {
         setApplication({
-          status: "Rejected"
+          status: "Sorry, you werr rejected!",
+          rejected: true
         })
       } else {
         setApplication({
-          status: "No response yet"
+          status: "No response yet!",
+          pending: true
         })
       }
       setLoading(false)
     })
     .catch((err) => {
       if(err?.response?.status === 404) {
-        setApplied(false)
+        setApplication(false)
       }
       setLoading(false)
     })
@@ -192,7 +195,8 @@ export const apply = async ({id, dispatch, setLoading, setApplication}) => {
     .then((res) => {
       setLoading(false)
       setApplication({
-        status: "No response yet"
+        status: "No response yet",
+        pending: true
       })
       dispatch({
         type: ADD,
@@ -205,6 +209,38 @@ export const apply = async ({id, dispatch, setLoading, setApplication}) => {
     .catch((err) => {
       setLoading(false)
       catchError({err, dispatch})
+    })
+}
+
+export const revoke = async ({id, dispatch, setLoading, setApplication, closeModal}) => {
+  let user = await AsyncStorage.getItem("user")
+  let token = JSON.parse(user)?.token
+
+  let config = {
+    headers: {
+      Authorization: `Bearer ` + token,
+    },
+  }
+  setLoading(true)
+  axios
+    .delete(`${API}/jobs/${id}/revoke`, config)
+    .then((res) => {
+      console.log(res)
+      setLoading(false)
+      setApplication(false)
+      checkApplicationStatus({id, setApplication, setLoading, dispatch})
+      dispatch({
+        type: ADD,
+        payload: {
+          type: "success",
+          message: "You revoked this application"
+        }
+      })
+      closeModal()
+    })
+    .catch((err) => {
+      setLoading(false)
+      catchError(err, dispatch)
     })
 }
 
