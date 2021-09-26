@@ -40,9 +40,22 @@ const ApplicationModal = ({isVisible, closeModal, application, job}) => {
                     borderTopLeftRadius: SIZES.padding,
                     backgroundColor: COLORS.white,
                 }}>
-                    <PrimaryHeader label="Application details" customStyle={{
-                            ...FONTS.h2
-                        }}/>
+                        <ScrollView style={{
+                            flex: 1
+                        }}>
+                            {/* render company */}
+
+                            {/* render job name */}
+                            <PrimaryHeader label={job?.name} customStyle={{
+                                ...FONTS.h2
+                            }}/>
+
+                            {/* render application status */}
+
+                            {/* render application info */}
+
+                        </ScrollView>
+                        {/* footer ie No ,ore interested? revoke, and close modal btn*/}
                 </View>
             </View>
         </Modal>

@@ -8,7 +8,7 @@ import {useAlertDispatch} from "../../context/alert"
 import {Date} from "../"
 import {capitalizeSentence} from "../../utils/capitalizeSentence"
 
-const VerticalJob = ({job, screen, navigation}) => {
+const VerticalJob = ({job, screen, navigation, route}) => {
     const {id, company, name, location, closeDate, jobType} = job
     let logo = BACKEND + "/api" + company?.logo?.split("api")[1]
     const {user, isAuthenticated} = useAuthState()
@@ -38,11 +38,19 @@ const VerticalJob = ({job, screen, navigation}) => {
                 activeOpacity={0.6}
                 underlayColor="transparent"
                 onPress={() => {
-                    navigation.navigate("Job", {
-                        id,
-                        job,
-                        logo
-                    })
+                    if(route === "Job") {
+                        navigation.push("Job", {
+                            id,
+                            job,
+                            logo
+                        })
+                    } else {
+                        navigation.navigate("Job", {
+                            id,
+                            job,
+                            logo
+                        })
+                    }
                 }}
             >
                 <View style={{

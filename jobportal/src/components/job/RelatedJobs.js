@@ -6,7 +6,7 @@ import {FONTS,SIZES} from "../../constants"
 import {fetchRecommendedJobs} from "../../context/actions/jobs"
 import {useAlertDispatch} from "../../context/alert"
 
-const RelatedJobs = ({job, setJob, navigation}) => {
+const RelatedJobs = ({job, setJob, navigation, name}) => {
     const [loading, setLoading] = useState(true)
     const [meassage, setMessage] = useState(null)
     const dispatch = useAlertDispatch()
@@ -49,7 +49,7 @@ const RelatedJobs = ({job, setJob, navigation}) => {
                     data={job?.jobs}
                     keyExtractor={item => `${item.id}`}
                     renderItem={({item, index}) => (
-                        <VerticalJob job={item} screen="jobs" navigation={navigation} />
+                        <VerticalJob job={item} screen="jobs" navigation={navigation} route={name} />
                     )}
                 />
             </View>

@@ -49,7 +49,7 @@ const Job = ({navigation, route}) => {
             <Nav navItems={navItems} setSelected={setSelected} selected={selected}/>
 
             {/* display details */}
-            <Details selected={selected} job={job} setJob={setJob} navigation={navigation} />
+            <Details selected={selected} job={job} setJob={setJob} navigation={navigation} name={route?.name} />
         </View>
     )
 
