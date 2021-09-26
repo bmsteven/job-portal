@@ -20,6 +20,8 @@ const Categories = ({navigation}) => {
         if(isMounted)
             if (categories?.length <= 1 || categories === undefined ) {
                 fetchCategories({dispatch, setLoading})
+            } else {
+                setLoading(false)
             }
         return () => {
             isMounted = false

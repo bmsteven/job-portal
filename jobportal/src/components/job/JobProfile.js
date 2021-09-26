@@ -7,17 +7,41 @@ import {capitalizeSentence} from "../../utils/capitalizeSentence"
 
 const JobProfile = ({job, logo}) => {
     let {name, company, location, closeDate, jobType} = job
+    console.log(company?.verified, "here");
     return (
         <Template>
             {/* render title */}
             <View style={{
-                marginBottom: SIZES.padding / 2
+                marginBottom: SIZES.padding / 2,
             }}>
                 <PrimaryHeader label={capitalizeSentence(name)} containerStyle={{
                     paddingHorizontal: 0,
-                    paddingVertical: 0
+                    paddingVertical: 0,
+                    // width: 
                 }} />
             </View>
+
+            {/* badge */}
+            {company?.verified && <View style={{
+                width: 100,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: SIZES.radius / 2,
+                borderRadius: SIZES.radius, 
+                backgroundColor: COLORS.primary
+            }}>
+                <Text style={{
+                    ...FONTS.body4,
+                    color: COLORS.white2,
+                    marginRight: SIZES.radius / 2
+                }}>Verified</Text>
+                <Image source={icons.verified} style={{
+                    width: 20,
+                    height: 20,
+                    tintColor: COLORS.white2
+                }} />
+            </View>}
 
             {/* render location */}
             <View style={{

@@ -21,6 +21,7 @@ const register = require("../assets/icons/register.png")
 const bin = require("../assets/icons/delete.png")
 const check = require("../assets/icons/check.png")
 const uncheck = require("../assets/icons/uncheck.png")
+const verified = require("../assets/icons/verified.png")
 
 export default {
     cross,
@@ -45,5 +46,6 @@ export default {
     register,
     bin,
     check,
-    uncheck
+    uncheck,
+    verified
 }

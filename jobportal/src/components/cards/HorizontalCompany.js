@@ -64,11 +64,26 @@ const HorizontalCompany = ({index, company, length, navigation}) => {
                             />
                         </View>
                         <View>
-                            {name && <Text numberOfLines={1} style={{
+                            {name && <View style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                            }}>
+                            <Text numberOfLines={1} style={{
                                 ...FONTS.body3,
                                     color: COLORS.black,
                                     marginBottom: 2
-                            }}>{capitalizeSentence(name)}</Text>}
+                            }}>{capitalizeSentence(name)}</Text>
+                             <View style={{
+                                    marginLeft: SIZES.padding / 4
+                                }}>
+                                <Image source={icons.verified} style={{
+                                    tintColor: COLORS.primary,
+                                    height: 16,
+                                    width: 16
+                                }} />
+                            </View>
+                            </View>
+                            }
 
                         {/* render location */}
                         <View style={{

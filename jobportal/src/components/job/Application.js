@@ -4,9 +4,8 @@ import {checkApplicationStatus, apply} from "../../context/actions/jobs"
 import {COLORS, SIZES} from "../../constants"
 import {TextButton} from "../"
 
-const Application = ({id, isAuthenticated, dispatch, setOpenModal}) => {
+const Application = ({id, isAuthenticated, dispatch, openModal, setApplication, application}) => {
     const [loading, setLoading] = useState(true)
-    const [applied, setApplied] = useState(false)
     const [applyLoading, setApplyLoading] = useState(false)
 
     useEffect(() => {
@@ -14,7 +13,7 @@ const Application = ({id, isAuthenticated, dispatch, setOpenModal}) => {
         if(isMounted && isAuthenticated) {
             checkApplicationStatus({
                 setLoading,
-                setApplied,
+                setApplication,
                 dispatch,
                 id
             })
@@ -30,17 +29,17 @@ const Application = ({id, isAuthenticated, dispatch, setOpenModal}) => {
             justifyContent: "center",
         }}>
             {!loading && 
-                <TextButton label={applied ? "View Application" : applyLoading ? "Please wait" : "Apply Now" } 
+                <TextButton label={application ? "View Application" : applyLoading ? "Please wait" : "Apply Now" } 
                     onPress={() => {
-                        if(!applied) {
+                        if(!application) {
                             apply({
                                 setLoading: setApplyLoading,
-                                setApplied,
+                                setApplication,
                                 dispatch,
                                 id
                             })
                         } else {
-                            setOpenModal(true)
+                            openModal()
                         }
                     }}
                     disabled={applyLoading}

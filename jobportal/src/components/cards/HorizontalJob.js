@@ -115,23 +115,38 @@ const HorizontalJob = ({job, index, length, navigation}) => {
             <View style={{
                     marginTop: SIZES.padding
                 }}>
-                    {company?.name && <Text numberOfLines={1} style={{
+                    {company?.name && <View style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                        }}><Text numberOfLines={1} style={{
                         ...FONTS.body3,
                             color: index === 1? COLORS.white2 : index % 2 === 0 ? COLORS.color_primary_alert : COLORS.color_success_alert,
-                             marginBottom: 2
-                    }}>{capitalizeSentence(company.name)}</Text>}
+                             marginBottom: 2,
+                             maxWidth: "90%"
+                    }}>{capitalizeSentence(company.name)}</Text>
+                    <View style={{
+                        marginLeft: SIZES.padding / 4
+                    }}>
+                    <Image source={icons.verified} style={{
+                        tintColor: index === 1? COLORS.white2 : index % 2 === 0 ? COLORS.primary : COLORS.primary,
+                        height: 16,
+                        width: 16
+                    }} />
+                </View>
+                    </View>
+                    }
                     <View style={{
                         flexDirection: "row",
                         alignItems: "center",
                     }}>
                     <View style={{
-                    marginRight: SIZES.padding / 4
-                }}>
-                <Image source={icons.location} style={{
-                    tintColor: COLORS.index === 1? COLORS.gray2 : index % 2 === 0 ? COLORS.gray : COLORS.gray,
-                    height: 16,
-                    width: 16
-                }} />
+                        marginRight: SIZES.padding / 4
+                    }}>
+                    <Image source={icons.location} style={{
+                        tintColor: COLORS.index === 1? COLORS.gray2 : index % 2 === 0 ? COLORS.gray : COLORS.gray,
+                        height: 16,
+                        width: 16
+                    }} />
                 </View>
                     {location ? <Text numberOfLines={1} style={{
                             ...FONTS.body4,

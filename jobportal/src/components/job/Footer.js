@@ -5,7 +5,7 @@ import {useAlertDispatch} from "../../context/alert"
 import {Favourite, Application} from "./"
 import {COLORS, SIZES} from "../../constants"
 
-const Footer = ({id, setOpenModal}) => {
+const Footer = ({id, openModal, application, setApplication}) => {
     
     const {user, isAuthenticated} = useAuthState()
     const dispatch = useAlertDispatch()
@@ -30,7 +30,7 @@ const Footer = ({id, setOpenModal}) => {
                 elevation: 5,
             }}>
                 <Favourite id={id} userId={user?.id} isAuthenticated={isAuthenticated} dispatch={dispatch}/>
-                <Application id={id} userId={user?.id} isAuthenticated={isAuthenticated} dispatch={dispatch} setOpenModal={setOpenModal}/>
+                <Application id={id} userId={user?.id} isAuthenticated={isAuthenticated} dispatch={dispatch} openModal={openModal} application={application} setApplication={setApplication} />
             </View> : <View>
                 
             </View>}

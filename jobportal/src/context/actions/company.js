@@ -8,7 +8,7 @@ export const fetchFeaturedCompanies = async ({setItems, setLoading}) => {
      setLoading(true)
   axios
     .get(
-      `${API}/companies?pageSize=6&fields=name,id,location,logo`
+      `${API}/companies?pageSize=6&fields=name,id,location,logo,verified`
     )
     .then((res) => {
       setItems(res.data.companies)
@@ -23,7 +23,7 @@ export const fetchCompanies = async ({setItems, setLoading, dispatch}) => {
     setLoading(true)
     axios
       .get(
-        `${API}/companies?pageSize=6&fields=name,id,location,logo`
+        `${API}/companies?pageSize=6&fields=name,id,location,logo,verified`
       )
       .then((res) => {
         setItems(res.data.companies)

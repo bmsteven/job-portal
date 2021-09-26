@@ -138,7 +138,7 @@ export const toggleFavourite = async ({id, setFavourite, dispatch, favourite}) =
     }
 }
 
-export const checkApplicationStatus = async ({setLoading, setApplied, dispatch, id}) => {
+export const checkApplicationStatus = async ({setLoading, setApplication, dispatch, id}) => {
   let user = await AsyncStorage.getItem("user")
   let token = JSON.parse(user)?.token
   let userId = JSON.parse(user)?.id
@@ -150,9 +150,23 @@ export const checkApplicationStatus = async ({setLoading, setApplied, dispatch, 
   }
   setLoading(true)
   axios
-    .get(`${API}/jobs/${id}/applications/${userId}?fields=id`, config)
+    .get(`${API}/jobs/${id}/applications/${userId}?fields=id?fields=accepted,rejected,interview`, config)
     .then((res) => {
-      setApplied(true)
+      if(res?.data?.interview === true) {
+        setApplication({
+          status: "Accepted",
+          date: res?.data?.date,
+          location: res?.data?.location
+        })
+      } else if (res?.data?.interview === false) {
+        setApplication({
+          status: "Rejected"
+        })
+      } else {
+        setApplication({
+          status: "No response yet"
+        })
+      }
       setLoading(false)
     })
     .catch((err) => {
@@ -163,7 +177,7 @@ export const checkApplicationStatus = async ({setLoading, setApplied, dispatch, 
     })
 }
 
-export const apply = async ({id, dispatch, setLoading, setApplied}) => {
+export const apply = async ({id, dispatch, setLoading, setApplication}) => {
   let user = await AsyncStorage.getItem("user")
   let token = JSON.parse(user)?.token
 
@@ -177,7 +191,9 @@ export const apply = async ({id, dispatch, setLoading, setApplied}) => {
     .post(`${API}/jobs/${id}/apply`, {}, config)
     .then((res) => {
       setLoading(false)
-      setApplied(true)
+      setApplication({
+        status: "No response yet"
+      })
       dispatch({
         type: ADD,
         payload: {

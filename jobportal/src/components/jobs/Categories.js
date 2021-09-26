@@ -8,7 +8,7 @@ import {Category, SubCategory} from "./categories"
 import {CategoryLoader} from "../loaders"
 
 const Categories = ({search, setSearch, url, setUrl}) => {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [selected, setSelected] = useState(0)
     const {categories} = useAuthState()
     const dispatch = useAuthDispatch()
@@ -20,6 +20,8 @@ const Categories = ({search, setSearch, url, setUrl}) => {
         if(isMounted)
             if (categories?.length <= 1 || categories === undefined ) {
                 fetchCategories({dispatch, setLoading})
+            } else {
+                setLoading(false)
             }
         return () => {
             isMounted = false

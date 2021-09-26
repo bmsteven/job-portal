@@ -33,8 +33,6 @@ const FilterModal = ({isVisible, closeFilter, search, setSearch, url, setUrl}) =
         closeFilter()
     }
 
-    console.log(url);
-
     return (
         <Modal
             animationType="fade"

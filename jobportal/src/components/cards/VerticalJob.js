@@ -143,11 +143,26 @@ const VerticalJob = ({job, screen, navigation}) => {
                     />
                 </View>
                 <View>
-                    {company?.name && <Text numberOfLines={1} style={{
+                    {company?.name && <View style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                    }}>
+                    <Text numberOfLines={1} style={{
                         ...FONTS.body3,
                             color: COLORS.black,
                              marginBottom: 2
-                    }}>{capitalizeSentence(company.name)}</Text>}
+                    }}>{capitalizeSentence(company.name)}</Text>
+                    <View style={{
+                        marginLeft: SIZES.padding / 4
+                    }}>
+                    <Image source={icons.verified} style={{
+                        tintColor: COLORS.primary,
+                        height: 16,
+                        width: 16
+                    }} />
+                </View>
+                </View>
+                    }
                     <View style={{
                         flexDirection: "row",
                         alignItems: "center",

@@ -7,6 +7,7 @@ import JobDetails from "./JobDetails"
 import CompanyDetails from "./CompanyDetails"
 import RelatedJobs from "./RelatedJobs"
 import Template from "./Template"
+import ApplicationModal from "./ApplicationModal"
 
 export {
     Footer,
@@ -17,5 +18,6 @@ export {
     JobDetails,
     CompanyDetails,
     RelatedJobs,
-    Template
+    Template,
+    ApplicationModal
 }
