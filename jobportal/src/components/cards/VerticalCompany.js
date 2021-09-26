@@ -4,7 +4,7 @@ import {SIZES, COLORS, FONTS, icons} from "../../constants"
 import {BACKEND} from "../../utils/api"
 import {capitalizeSentence} from "../../utils/capitalizeSentence"
 
-const VerticalCompany = ({ company}) => {
+const VerticalCompany = ({ company, navigation}) => {
     let {id, name, logo, location} = company
     logo = BACKEND + "/api" + logo?.split("api")[1]
     return (
@@ -18,14 +18,19 @@ const VerticalCompany = ({ company}) => {
             <TouchableHighlight 
                 activeOpacity={0.8}
                 underlayColor="transparent"
-                onPress={() => {}}
+                onPress={() => {
+                    navigation.navigate("Company", {
+                        id,
+                        company,
+                        logo
+                    })
+                }}
             >
                 <View style={{
                         backgroundColor: COLORS.white,
                         padding: SIZES.padding,
                         width: "100%",
                         borderRadius: SIZES.radius,
-                        // marginLeft: SIZES.padding,
                     }}
                 >
                     {/* render company info */}

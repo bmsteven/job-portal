@@ -7,7 +7,7 @@ import { COLORS, FONTS, SIZES } from "../../constants"
 import {Category, SubCategory} from "./categories"
 import {CategoryLoader} from "../loaders"
 
-const Categories = () => {
+const Categories = ({navigation}) => {
     const [loading, setLoading] = useState(false)
     const [selected, setSelected] = useState(0)
     const {categories} = useAuthState()
@@ -77,7 +77,7 @@ const Categories = () => {
                     flexDirection: "row",
                     flexWrap: "wrap"
                 }}>
-                    {selectedCategory.children.map((subcategory) => <SubCategory key={subcategory.id} subcategory={subcategory} category={selectedCategory} />)}
+                    {selectedCategory.children.map((subcategory) => <SubCategory key={subcategory.id} subcategory={subcategory} category={selectedCategory} navigation={navigation} />)}
                 </View>
             }
 

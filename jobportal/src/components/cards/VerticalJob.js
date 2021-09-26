@@ -8,17 +8,17 @@ import {useAlertDispatch} from "../../context/alert"
 import {Date} from "../"
 import {capitalizeSentence} from "../../utils/capitalizeSentence"
 
-const VerticalJob = ({job, screen}) => {
+const VerticalJob = ({job, screen, navigation}) => {
     const {id, company, name, location, closeDate, jobType} = job
     let logo = BACKEND + "/api" + company?.logo?.split("api")[1]
-    const {user} = useAuthState()
+    const {user, isAuthenticated} = useAuthState()
     const dispatch = useAlertDispatch()
     const [loading, setLoading] = useState(true)
     const [favourite, setFavourite] = useState(false)
 
      useEffect(() => {
         let isMounted = true
-        if (isMounted && screen === "jobs")
+        if (isMounted && screen === "jobs" && isAuthenticated)
             checkFavourite({
                 setLoading,
                 setFavourite,
@@ -37,7 +37,13 @@ const VerticalJob = ({job, screen}) => {
             <TouchableHighlight 
                 activeOpacity={0.6}
                 underlayColor="transparent"
-                onPress={() => {}}
+                onPress={() => {
+                    navigation.navigate("Job", {
+                        id,
+                        job,
+                        logo
+                    })
+                }}
             >
                 <View style={{
                     backgroundColor: COLORS.transparentWhite5,
@@ -61,7 +67,7 @@ const VerticalJob = ({job, screen}) => {
                                 ...FONTS.body2
                             }}>{capitalizeSentence(name)}</Text>
                         </View>}
-                        {!loading && screen === "jobs" && <TouchableOpacity style={{
+                        {!loading && screen === "jobs" && isAuthenticated && <TouchableOpacity style={{
                                 backgroundColor: COLORS.white,
                                 justifyContent: "center",
                                 alignItems: "center",

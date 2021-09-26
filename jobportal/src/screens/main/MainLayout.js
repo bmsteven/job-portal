@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { View, Text, TouchableOpacity } from "react-native"
 import { createStackNavigator, TransitionPresets } from "@react-navigation/stack"
 import Animated from "react-native-reanimated"
-import { BottomTabsScreen, Search } from "../MainScreens"
+import { BottomTabsScreen, Search, Job, Company } from "../MainScreens"
 import {COLORS} from "../../constants"
 const Stack = createStackNavigator()
 const TransitionScreenOptions = {
@@ -28,6 +28,12 @@ const MainLayout = ({navigation, drawerAnimationStyle}) => {
         }}/>
         <Stack.Screen name="Search" children={(props) => {
           return <Search {...props} />
+        }} />
+        <Stack.Screen name="Job" children={(props) => {
+          return <Job {...props} />
+        }} />
+        <Stack.Screen name="Company" children={(props) => {
+          return <Company {...props} />
         }} />
       </Stack.Navigator>
     </Animated.View>

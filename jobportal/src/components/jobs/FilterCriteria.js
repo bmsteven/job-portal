@@ -18,17 +18,24 @@ const FilterCriteria = ({search, setSearch, url, setUrl}) => {
 
                 {/* keyword */}
                 {search?.name?.trim().length > 0 && <FilterItem label="Keyword: " value={search.name} onDelete={() => {
-                    setSearch({
-                        ...search,
-                        name: ""
-                    })
-                    setUrl(
-                        url.replace(
-                            url?.split("&")?.find((el) => el.includes("name")),
-                            ``
-                        )
-                    )
-                }} />}
+                        setSearch({
+                            ...search,
+                            name: ""
+                        })
+
+                        // filter and replace
+                        setUrl(prev => {
+                            let param = prev?.split("&")
+                            let items = []
+                            param.filter(el => el.includes("name"))
+                            let newUrl = prev
+                            for (let i = 0; i < param.length; i++) {
+                                newUrl = newUrl.replace(param[i], "")
+                            }
+                            return newUrl
+                        })
+                    }} 
+                />}
 
                 {/* location */}
                 {search?.location?.trim().length > 0 && <FilterItem label="Location: " value={search.location} onDelete={() => {
@@ -36,12 +43,17 @@ const FilterCriteria = ({search, setSearch, url, setUrl}) => {
                         ...search,
                         location: ""
                     })
-                    setUrl(
-                        url.replace(
-                            url?.split("&")?.find((el) => el.includes("location")),
-                            ``
-                        )
-                    )
+                    // filter and replace
+                        setUrl(prev => {
+                            let param = prev?.split("&")
+                            let items = []
+                            param.filter(el => el.includes("location"))
+                            let newUrl = prev
+                            for (let i = 0; i < param.length; i++) {
+                                newUrl = newUrl.replace(param[i], "")
+                            }
+                            return newUrl
+                        })
                 }} />}
 
                 {search?.categories?.length > 0 && <FilterCategory search={search} setSearch={setSearch} url={url} setUrl={setUrl} />}

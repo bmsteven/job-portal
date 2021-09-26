@@ -46,7 +46,7 @@ const Jobs = ({navigation}) => {
                 <Search openFilter={openFilter}/>
 
                 {/* jobs list */}
-                <JobsList />
+                <JobsList navigation={navigation} />
 
                 {/* filter modal */}
                 {isVisible && <FilterModal closeFilter={closeFilter} isVisible={isVisible} setSearch={setSearch} search={search} url={url} setUrl={setUrl} />}

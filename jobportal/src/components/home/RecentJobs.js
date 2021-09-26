@@ -6,7 +6,7 @@ import {fetchJobs} from "../../context/actions/jobs"
 import {useAlertDispatch} from "../../context/alert"
 import {JobLoader} from "../loaders"
 
-const RecentJobs = () => {
+const RecentJobs = ({navigation}) => {
     const [jobs, setJobs] = useState([])
     const [loading, setLoading] = useState(false)
     const dispatch = useAlertDispatch()
@@ -51,7 +51,7 @@ const RecentJobs = () => {
                     data={jobs}
                     keyExtractor={item => `${item.id}`}
                     renderItem={({item, index}) => (
-                        <VerticalJob job={item} />
+                        <VerticalJob job={item} navigation={navigation} />
                     )}
                 />
              </View>

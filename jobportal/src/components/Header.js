@@ -7,25 +7,25 @@ const Header = ({ navigation}) => {
     const {user, isAuthenticated} = useAuthState()
     return (
         <View style={{
-            paddingVertical: SIZES.padding / 2,
+            padding: SIZES.padding / 3,
+            paddingHorizontal: SIZES.radius,
         }}>
         <View style={{
-            backgroundColor: COLORS.bg,
+            backgroundColor: COLORS.transparentWhite5,
             flexDirection: "row",
-            paddingHorizontal: SIZES.padding,
+            paddingHorizontal: SIZES.padding / 2,
             paddingVertical: SIZES.padding / 3,
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
-            shadowColor: "rgba(0,0,0,0.7)",
+            shadowColor: COLORS.transparentBlack7,
             shadowOffset: {
-            width: 3,
-            height: 2,
+                width: 3,
+                height: 2,
             },
-            shadowOpacity: 0.01,
+            shadowOpacity: 0.05,
             shadowRadius: 5,
-            elevation: 5,
-
+            elevation: 2,
         }}>
             {/* menu */}
             <TouchableOpacity onPress={() => navigation.openDrawer()}

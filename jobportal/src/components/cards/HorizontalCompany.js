@@ -4,7 +4,7 @@ import {SIZES, COLORS, FONTS, icons} from "../../constants"
 import {BACKEND} from "../../utils/api"
 import {capitalizeSentence} from "../../utils/capitalizeSentence"
 
-const HorizontalCompany = ({index, company, length}) => {
+const HorizontalCompany = ({index, company, length, navigation}) => {
     let {id, name, logo, location} = company
     logo = BACKEND + "/api" + logo?.split("api")[1]
     let lastItem = index === length
@@ -17,7 +17,13 @@ const HorizontalCompany = ({index, company, length}) => {
             <TouchableHighlight 
                 activeOpacity={0.8}
                 underlayColor="transparent"
-                onPress={() => {}}
+                onPress={() => {
+                    navigation.navigate("Company", {
+                        id,
+                        company,
+                        logo,
+                    })
+                }}
             >
                 <View style={{
                         backgroundColor: COLORS.white,

@@ -12,7 +12,15 @@ const BackHeader = ({isFocused, navigation, children}) => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            height: 50
+            height: 50,
+            shadowColor: "rgba(0,0,0,0.7)",
+            shadowOffset: {
+                width: 10,
+                height: 5,
+            },
+            shadowOpacity: 0.1,
+            shadowRadius: 10,
+            elevation: 2,
         }}>
             {/* display back icon */}
             <TouchableOpacity style={{

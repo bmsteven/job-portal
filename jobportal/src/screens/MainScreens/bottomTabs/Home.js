@@ -31,7 +31,7 @@ const Home = ({navigation}) => {
             <Search navigation={navigation}/>
 
             {/* recommends */}
-            <Recommends />
+            <Recommends navigation={navigation}/>
 
             {/* categories */}
             <Categories navigation={navigation}/>

@@ -10,9 +10,30 @@ const FilterModal = ({isVisible, closeFilter, search, setSearch, url, setUrl}) =
 
     // set search url by applying filters
     const applyFilters = () => {
-        // fetch searched results with url created
+        // add keyword and location filters to url param
+        let param = ""
+        if(search?.name?.trim().length > 0) {
+            let value = search?.name
+            let splittedValue = value.split(" ")
+            splittedValue?.forEach(el => {
+                param = param + `&filter=name:ilike:${el}`
+            });
+        }
+
+        if(search?.location?.trim().length > 0) {
+            let value = search?.location
+            let splittedValue = value.split(" ")
+            splittedValue?.forEach(el => {
+                param = param + `&filter=location:ilike:${el}`
+            });
+        }
+        setUrl(url + param)
+
+        // fetch searched results with url created and after fetching close modal, AFTER FETCHING close modal 
         closeFilter()
     }
+
+    console.log(url);
 
     return (
         <Modal

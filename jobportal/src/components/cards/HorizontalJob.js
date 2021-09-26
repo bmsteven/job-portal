@@ -8,18 +8,18 @@ import {useAlertDispatch} from "../../context/alert"
 import {Date} from "../"
 import {capitalizeSentence} from "../../utils/capitalizeSentence"
 
-const HorizontalJob = ({job, index, length}) => {
+const HorizontalJob = ({job, index, length, navigation}) => {
     const {id, company, name, location, closeDate, jobType} = job
     let logo = BACKEND + "/api" + company?.logo?.split("api")[1]
     let lastItem = index === length
-    const {user} = useAuthState()
+    const {user, isAuthenticated} = useAuthState()
     const dispatch = useAlertDispatch()
     const [loading, setLoading] = useState(true)
     const [favourite, setFavourite] = useState(false)
 
     useEffect(() => {
         let isMounted = true
-        if (isMounted)
+        if (isMounted && isAuthenticated)
             checkFavourite({
                 setLoading,
                 setFavourite,
@@ -40,7 +40,13 @@ const HorizontalJob = ({job, index, length}) => {
         <TouchableHighlight 
             activeOpacity={0.8}
             underlayColor="transparent"
-            onPress={() => {}}
+            onPress={() => {
+                navigation.navigate("Job", {
+                    id,
+                    job,
+                    logo
+                })
+            }}
             >
         <View style={{
                 backgroundColor: index === 1? COLORS.primary : index % 2 === 0 ? COLORS.border_primary_alert : COLORS.border_success_alert,
@@ -83,7 +89,7 @@ const HorizontalJob = ({job, index, length}) => {
                 </View>
 
                 {/* favourite */}
-                {!loading && <TouchableOpacity style={{
+                {!loading && isAuthenticated && <TouchableOpacity style={{
                         backgroundColor: COLORS.transparentWhite2,
                         justifyContent: "center",
                         alignItems: "center",

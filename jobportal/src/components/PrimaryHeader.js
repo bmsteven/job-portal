@@ -2,11 +2,12 @@ import React from 'react'
 import {View, Text} from "react-native"
 import {SIZES, FONTS} from "../constants"
 
-const PrimaryHeader = ({label, customStyle}) => {
+const PrimaryHeader = ({label, customStyle, containerStyle}) => {
     return (
         <View style={{
                 marginVertical: SIZES.radius,
-                paddingHorizontal: SIZES.padding
+                paddingHorizontal: SIZES.padding,
+                ...containerStyle
             }}>
                 <Text style={{
                     ...FONTS.h1,

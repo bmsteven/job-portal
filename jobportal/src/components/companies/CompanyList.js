@@ -8,7 +8,7 @@ import {VerticalCompanyLoader} from "../loaders"
 import {useAlertDispatch} from "../../context/alert"
 
 
-const FeaturedCompanies = () => {
+const FeaturedCompanies = ({navigation}) => {
     const [companies, setCompanies] = useState([])
     const [loading, setLoading] = useState(false) 
     const dispatch = useAlertDispatch()
@@ -41,7 +41,7 @@ const FeaturedCompanies = () => {
                 keyExtractor={item => `${item.id}`}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({item, index}) => (
-                    <VerticalCompany company={item} index={index + 1} length={companies?.length} />
+                    <VerticalCompany company={item} index={index + 1} length={companies?.length} navigation={navigation} />
                 )}
             />
             </>

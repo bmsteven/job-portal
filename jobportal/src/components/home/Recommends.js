@@ -6,7 +6,7 @@ import {fetchRecommendedJobs} from "../../context/actions/jobs"
 import {useAuthState} from "../../context/auth"
 import {Recommend} from "../loaders"
 
-const Recommends = () => {
+const Recommends = ({navigation}) => {
     const [jobs, setJobs] = useState([])
     const [loading, setLoading] = useState(false)
     const {user, isAuthenticated} = useAuthState()
@@ -58,7 +58,7 @@ const Recommends = () => {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 renderItem={({item, index}) => (
-                    <HorizontalJob job={item} index={index + 1} length={jobs?.length} />
+                    <HorizontalJob job={item} index={index + 1} length={jobs?.length} navigation={navigation} />
                 )}
             />
         </View>

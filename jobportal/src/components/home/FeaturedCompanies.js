@@ -6,7 +6,7 @@ import { COLORS, FONTS, SIZES } from "../../constants"
 import {fetchFeaturedCompanies} from "../../context/actions/company"
 import {CompanyLoader} from "../loaders"
 
-const FeaturedCompanies = () => {
+const FeaturedCompanies = ({navigation}) => {
     const [companies, setCompanies] = useState([])
     const [loading, setLoading] = useState(false) 
 
@@ -51,7 +51,7 @@ const FeaturedCompanies = () => {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 renderItem={({item, index}) => (
-                    <HorizontalCompany company={item} index={index + 1} length={companies?.length} />
+                    <HorizontalCompany company={item} index={index + 1} length={companies?.length} navigation={navigation} />
                 )}
             />
             </>

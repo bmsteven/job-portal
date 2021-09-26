@@ -5,6 +5,11 @@ import {BackHeader} from "../"
 
 const SearchInput = ({navigation, value, handleChange, focused}) => {
     const [isFocused, setFocused] = useState(focused)
+
+    // searhing
+    const searching = () => {
+        // search either company or jobs depending on user choice or where user comes from
+    }
     return (
         <BackHeader isFocused={isFocused} navigation={navigation} >
             <TextInput 
@@ -23,12 +28,17 @@ const SearchInput = ({navigation, value, handleChange, focused}) => {
                 value={value}
                 onChange={e => handleChange(e)}
                 autoFocus={isFocused}
+                returnKeyType="search"
+                onSubmitEditing={searching}
             />
             <TouchableOpacity style={{
-                justifyContent: "center",
-                alignItems: "flex-end",
-                flex: 1.5,
-            }}>
+                    justifyContent: "center",
+                    alignItems: "flex-end",
+                    flex: 1.5,
+                }}
+                onPress={searching}
+            
+            >
                 <Image source={icons.search} style={{
                     height: 25,
                     width: 25,

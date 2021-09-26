@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, TouchableOpacity} from "react-native"
 import { COLORS, FONTS, SIZES } from "../../../constants"
 
-const SubCategory = ({subcategory, category}) => {
+const SubCategory = ({subcategory, category, navigation}) => {
     const {id, name} = subcategory
     return (
         <View style={{

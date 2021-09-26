@@ -110,25 +110,28 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
-        width: "100%",
-        paddingHorizontal: 10
+        maxWidth: "100%",
+        // paddingHorizontal: 10
     },
     alertContainer: {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        maxWidth: "100%",
         width: "100%"
     },
     messageContainer: {
         paddingVertical:  SIZES.padding / 2,
         paddingHorizontal: SIZES.padding,
+        flex: 3.5
     },
     textStyle: {
         ...FONTS.body4,  
     },
     close: {
-        width: 60,
+        // width: 60,
+        flex: 1,
         height: "100%",
         backgroundColor: COLORS.transparentWhite4,
         justifyContent: "center",

@@ -221,7 +221,6 @@ const styles = StyleSheet.create({
     alertContainer: {
         paddingHorizontal: SIZES.padding,
         paddingVertical:  SIZES.padding / 2,
-        display: "flex",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-around",
