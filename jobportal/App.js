@@ -1,5 +1,8 @@
 import React, { useEffect } from "react"
-import { createStackNavigator, TransitionPresets } from "@react-navigation/stack"
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { NavigationContainer } from "@react-navigation/native"
 import CustomDrawer from "./src/navigation/CustomDrawer"
@@ -10,17 +13,18 @@ import {
   ForgotPassword,
   Loader,
 } from "./src/screens/index"
+import { Search, Job, Company } from "./src/screens/MainScreens"
+
 import { useAuthDispatch, useAuthState } from "./src/context/auth"
 import { useAlertState } from "./src/context/alert"
-import { FAILED, AUTH, LOAD_DP } from "./src/context/types"
+import { FAILED, AUTH } from "./src/context/types"
 import { Alert } from "./src/components"
-import {BACKEND} from "./src/utils/api"
 
 const Stack = createStackNavigator()
 
 const TransitionScreenOptions = {
-  ...TransitionPresets.SlideFromRightIOS, 
-};
+  ...TransitionPresets.SlideFromRightIOS,
+}
 
 const App = () => {
   const { loading, user, isAuthenticated } = useAuthState()
@@ -44,19 +48,6 @@ const App = () => {
         })
       }
     })
-    
-    // await AsyncStorage.getItem("dp", (err, value) => {
-    //   if (value) {
-    //     dispatch({
-    //       type: LOAD_DP,
-    //       payload: value,
-    //     })
-    //   } else {
-    //     dispatch({
-    //       type: FAILED,
-    //     })
-    //   }
-    // })
   }
 
   return (
@@ -64,24 +55,31 @@ const App = () => {
       {loading ? (
         <Loader />
       ) : (
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-              ...TransitionScreenOptions
-            }}
-            initialRouteName={isAuthenticated && user ? "CustomDrawer" : "OnBoarding"}
-          >
-            <Stack.Screen name="CustomDrawer" children={CustomDrawer} />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+            ...TransitionScreenOptions,
+          }}
+          initialRouteName={
+            isAuthenticated && user ? "CustomDrawer" : "OnBoarding"
+          }
+        >
+          <Stack.Screen name="CustomDrawer" children={CustomDrawer} />
 
-            <Stack.Screen name="OnBoarding" component={OnBoarding} />
+          <Stack.Screen name="OnBoarding" component={OnBoarding} />
 
-            <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="SignIn" component={SignIn} />
 
-            <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="SignUp" component={SignUp} />
 
-            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
 
-          </Stack.Navigator>
+          <Stack.Screen name="Search" component={Search} />
+
+          <Stack.Screen name="Job" component={Job} />
+
+          <Stack.Screen name="Company" component={Company} />
+        </Stack.Navigator>
       )}
       {alert.message ? <Alert /> : null}
     </NavigationContainer>
