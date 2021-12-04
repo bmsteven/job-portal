@@ -12,6 +12,7 @@ import { checkFavourite, toggleFavourite } from "../../context/actions/jobs"
 import { useAuthState } from "../../context/auth"
 import { useAlertDispatch } from "../../context/alert"
 import { Date } from "../"
+import Company from "../Company"
 import { capitalizeSentence } from "../../utils/capitalizeSentence"
 
 const VerticalJob = ({ job, screen, navigation, route }) => {
@@ -164,103 +165,22 @@ const VerticalJob = ({ job, screen, navigation, route }) => {
           </View>
 
           {/* render job info */}
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: SIZES.padding / 1.5,
-            }}
-          >
-            <View
-              style={{
-                height: 50,
-                width: 50,
-                backgroundColor: COLORS.white,
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: SIZES.radius,
-                shadowColor: "rgba(0,0,0,0.5)",
-                shadowOffset: {
-                  width: 10,
-                  height: 5,
-                },
-                shadowOpacity: 0.01,
-                shadowRadius: 5,
-                elevation: 5,
-                marginRight: SIZES.padding,
-              }}
-            >
-              <Image
-                source={{ uri: logo }}
-                style={{
-                  height: 40,
-                  width: 40,
-                  resizeMode: "contain",
+          <Company
+            logo={logo}
+            name={company?.name}
+            verified={company?.verified}
+            // location={location ?? company?.location}
+            dueDate={
+              <Date
+                date={closeDate}
+                textStyle={{
+                  ...FONTS.body4,
+                  color: COLORS.gray,
                 }}
               />
-            </View>
-            <View>
-              {company?.name && (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    numberOfLines={1}
-                    style={{
-                      ...FONTS.body3,
-                      color: COLORS.black,
-                      marginBottom: 2,
-                    }}
-                  >
-                    {capitalizeSentence(company.name)}
-                  </Text>
-                  <View
-                    style={{
-                      marginLeft: SIZES.padding / 4,
-                    }}
-                  >
-                    <Image
-                      source={icons.verified}
-                      style={{
-                        tintColor: COLORS.primary,
-                        height: 16,
-                        width: 16,
-                      }}
-                    />
-                  </View>
-                </View>
-              )}
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginTop: SIZES.padding / 5,
-                }}
-              >
-                {/* render jobType */}
-                {jobType && (
-                  <Text
-                    style={{
-                      ...FONTS.body3,
-                      color: COLORS.gray,
-                    }}
-                  >
-                    {jobType} -{" "}
-                  </Text>
-                )}
-                <Date
-                  date={closeDate}
-                  textStyle={{
-                    ...FONTS.body4,
-                    color: COLORS.gray,
-                  }}
-                />
-              </View>
-            </View>
-          </View>
+            }
+            jobType={jobType}
+          />
         </View>
       </TouchableHighlight>
     </View>
