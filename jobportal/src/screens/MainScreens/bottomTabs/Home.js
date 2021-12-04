@@ -1,62 +1,61 @@
-import React from 'react'
+import React from "react"
 import { View, SafeAreaView, FlatList } from "react-native"
+import { PrimaryHeader } from "../../../components"
 import {
- PrimaryHeader
-} from "../../../components"
-import {
-    Search,
-    Recommends,
-    Categories,
-    RecentJobs,
-    FeaturedCompanies
+  Search,
+  Recommends,
+  Categories,
+  RecentJobs,
+  FeaturedCompanies,
 } from "../../../components/home"
-import {SIZES} from "../../../constants"
+import { SIZES } from "../../../constants"
 
-const Home = ({navigation}) => {
-    const emptyData = [];
+const Home = ({ navigation }) => {
+  const emptyData = []
 
-    const renderNullItem = () => null;
+  const renderNullItem = () => null
 
-    const ListFooterComponent = (
-        <>
-            {/* headline */}
-            <View style={{
-                    paddingVertical: SIZES.padding,
-                }}
-            >
-                <PrimaryHeader label="· Land to your destiny job today" />
-            </View>
+  const ListFooterComponent = (
+    <>
+      {/* headline */}
+      <View
+        style={{
+          paddingVertical: SIZES.padding,
+        }}
+      >
+        <PrimaryHeader label="· Land to your destiny job today" />
+      </View>
 
-            {/* search component */}
-            <Search navigation={navigation}/>
+      {/* search component */}
+      <Search navigation={navigation} />
 
-            {/* recommends */}
-            <Recommends navigation={navigation}/>
+      {/* recommends */}
+      <Recommends navigation={navigation} />
 
-            {/* categories */}
-            <Categories navigation={navigation}/>
+      {/* categories */}
+      <Categories navigation={navigation} />
 
-            {/* recent jobs */}
-            <RecentJobs navigation={navigation}/>
+      {/* recent jobs */}
+      <RecentJobs navigation={navigation} />
 
-            {/* companies */}
-            <FeaturedCompanies navigation={navigation}/>
-        </>
-    )
+      {/* companies */}
+      <FeaturedCompanies navigation={navigation} />
+    </>
+  )
 
-    return (
-            <SafeAreaView
-                style={{
-                    flex: 1,
-                }}
-            >
-                <FlatList
-                    data={emptyData}
-                    renderItem={renderNullItem}
-                    ListFooterComponent={ListFooterComponent}
-                />
-            </SafeAreaView>
-    )
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+      }}
+    >
+      <FlatList
+        data={emptyData}
+        renderItem={renderNullItem}
+        ListFooterComponent={ListFooterComponent}
+      />
+    </SafeAreaView>
+  )
 }
 
 export default Home

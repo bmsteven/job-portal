@@ -32,17 +32,17 @@ if (!user) {
 const reader = new FileReader()
 
 function toDataUrl(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-        reader.onloadend = function() {
-            callback(reader.result);
-        }
-        reader.readAsDataURL(xhr.response);
-    };
-    xhr.open('GET', url);
-    xhr.responseType = 'blob';
-    xhr.send();
+  var xhr = new XMLHttpRequest()
+  xhr.onload = function () {
+    reader.onloadend = function () {
+      callback(reader.result)
+    }
+    reader.readAsDataURL(xhr.response)
   }
+  xhr.open("GET", url)
+  xhr.responseType = "blob"
+  xhr.send()
+}
 
 const authReducer = (state, action) => {
   let { type, payload } = action
@@ -60,7 +60,7 @@ const authReducer = (state, action) => {
       })
       userCopy = {
         ...payload,
-        dp
+        dp,
       }
       return {
         ...state,
@@ -68,7 +68,7 @@ const authReducer = (state, action) => {
         user: userCopy,
         loading: false,
       }
-      
+
     case REGISTER:
       return {
         ...state,
@@ -212,7 +212,7 @@ const authReducer = (state, action) => {
     case AUTH:
       dp = payload.dp.split("api")
       dp = BACKEND + "/api" + dp[1]
-      userCopy = {...payload, dp}
+      userCopy = { ...payload, dp }
       return {
         ...state,
         user: userCopy,
@@ -224,14 +224,14 @@ const authReducer = (state, action) => {
       userDp = payload
       userCopy = {
         ...state.user,
-        userDp
+        userDp,
       }
 
       return {
         ...state,
         user: userCopy,
         isAuthenticated: true,
-        loading: false
+        loading: false,
       }
 
     case FAILED:
